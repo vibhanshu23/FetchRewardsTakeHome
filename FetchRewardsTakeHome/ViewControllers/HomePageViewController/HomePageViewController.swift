@@ -12,7 +12,7 @@ class HomePageViewController: UIViewController {
 
     @IBOutlet weak var cvMealList: UICollectionView!
     
-    let viewModel = MealViewModel()//Future scope: dependency injection
+    let viewModel = ViewModel()//Future scope: dependency injection
 
 
     override func viewDidLoad() {
