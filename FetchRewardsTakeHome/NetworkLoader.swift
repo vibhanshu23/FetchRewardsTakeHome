@@ -16,7 +16,7 @@ struct NetworkHandler {
 
         let task = session.dataTask(with: url) { data, response, error in
             //TODO: Consider checking data, response, and error if valid network response is recevied instead of force unwrapping the data
-            guard error != nil
+            guard error == nil
             else {
                 completion(nil, error)
                 //Future scope: Implement a error handler class for platform wide errors

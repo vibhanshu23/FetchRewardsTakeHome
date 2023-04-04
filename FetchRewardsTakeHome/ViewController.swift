@@ -20,8 +20,8 @@ class ViewController: UIViewController {
                 print(item)
             }
         }
-        viewModel.getMealDetails { arrMealDetail in
-            print(arrMealDetail)
+        viewModel.getMealDetails { mealDetail in
+            print(mealDetail)
         }
     }
 

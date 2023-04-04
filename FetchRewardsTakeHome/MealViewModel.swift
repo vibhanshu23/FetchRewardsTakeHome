@@ -9,6 +9,13 @@ import Foundation
 
 class MealViewModel {
 
+    var originalMealList = [Meal]()
+    lazy var displayMealList = {
+        self.originalMealList.sorted { meal1, meal2 in
+            meal1.name < meal2.name
+        }
+    }()
+    var currentDetailObject: MealDetail?
     init(){}
 
 //MARK: Network Interface
@@ -19,19 +26,24 @@ class MealViewModel {
             return
         }
         NetworkHandler.makeAPICall(with: url){
-            (response:MealDTO<[Meal]>?, error) in
+            (response:MealDTO<[MealObjectFromServer]>?, error) in
+
             if error != nil {
                 return
 //            TODO: Do error handling
             }
-            print(response)
-
+            for item in response!.meals {
+                self.originalMealList.append(item.getInterfaceObject())
+            }
+            completion(self.displayMealList)
         }
     }
 
 
 
-    func getMealDetails(completion: ([MealDetailLocal]) -> Void){
+    //MARK: Meal Detail
+
+    func getMealDetails(completion: @escaping (MealDetail) -> Void){
         guard let urlDetails = URL(string: MEALDETAILSURL + "53049")
         else {
 //                TODO: Do error handling
@@ -39,14 +51,14 @@ class MealViewModel {
         }
         NetworkHandler.makeAPICall(
             with: urlDetails
-        ){ (response:MealDTO<[MealDetails]>?, error) in
-            guard error != nil
+        ){ (response:MealDTO<[MealDetailsObjectFromServer]>?, error) in
+            guard error == nil
             else {
 //                TODO: Do error handling
                 return
             }
-
-            print(response)
+            self.currentDetailObject = response!.meals[0].getInterfaceObject()
+            completion(self.currentDetailObject!)
         }
 
     }
