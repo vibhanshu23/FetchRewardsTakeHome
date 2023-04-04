@@ -10,16 +10,12 @@ import Foundation
 class MealViewModel {
 
     var originalMealList = [Meal]()
-    lazy var displayMealList = {
-        self.originalMealList.sorted { meal1, meal2 in
-            meal1.name < meal2.name
-        }
-    }()
+    var displayMealList = [Meal]()
     var currentDetailObject: MealDetail?
     init(){}
 
 //MARK: Network Interface
-    func getMealList(completion: @escaping ([Meal]) -> Void) {
+    func getMealList(completion: @escaping ([Meal], Error?) -> Void) {
         guard let url = URL(string: MEALSURL)
         else {
             //        TODO: Do error handling
@@ -29,13 +25,22 @@ class MealViewModel {
             (response:MealDTO<[MealObjectFromServer]>?, error) in
 
             if error != nil {
-                return
+                DispatchQueue.main.async {
+                    completion([Meal](), error)
+                    return
 //            TODO: Do error handling
+                }
             }
             for item in response!.meals {
                 self.originalMealList.append(item.getInterfaceObject())
             }
-            completion(self.displayMealList)
+            self.displayMealList = self.originalMealList.sorted { meal1, meal2 in
+                meal1.name < meal2.name
+            }
+
+            DispatchQueue.main.async {
+                completion(self.displayMealList, nil)
+            }
         }
     }
 
@@ -43,7 +48,7 @@ class MealViewModel {
 
     //MARK: Meal Detail
 
-    func getMealDetails(completion: @escaping (MealDetail) -> Void){
+    func getMealDetails(completion: @escaping (MealDetail?, Error?) -> Void){
         guard let urlDetails = URL(string: MEALDETAILSURL + "53049")
         else {
 //                TODO: Do error handling
@@ -55,10 +60,15 @@ class MealViewModel {
             guard error == nil
             else {
 //                TODO: Do error handling
+                DispatchQueue.main.async {
+                    completion(nil, error)
+                }
                 return
             }
             self.currentDetailObject = response!.meals[0].getInterfaceObject()
-            completion(self.currentDetailObject!)
+            DispatchQueue.main.async {
+                completion(self.currentDetailObject!, nil)
+            }
         }
 
     }
