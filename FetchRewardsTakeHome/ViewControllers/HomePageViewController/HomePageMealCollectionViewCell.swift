@@ -16,14 +16,17 @@ class HomePageMealCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        imgItem.alpha = 0.5
+        imgItem.alpha = 0.6
         imgItem.contentMode = .scaleAspectFill
+        imgItem.layer.cornerRadius = 8
+        imgItem.clipsToBounds = true
 
-        lblName.backgroundColor = .black.withAlphaComponent(0.3)
         lblName.textColor = .white
-        lblName.font = .systemFont(ofSize: 24)
         lblName.numberOfLines = 0
-        
+        lblName.textAlignment = .center
+        lblName.font = UIFont.systemFont(ofSize: 28, weight: .bold)
+        lblName.textDropShadow()
+
     }
 
     func configure(with meal:Meal){

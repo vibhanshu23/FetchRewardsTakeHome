@@ -34,3 +34,15 @@ extension String{
     }
 
 }
+
+extension UILabel {
+    func textDropShadow() {
+        self.layer.shadowColor = UIColor.black.cgColor
+        self.layer.shadowOffset = CGSize(width: 2, height: 2)
+        self.layer.shadowRadius = 10.0
+        self.layer.shadowOpacity = 1.0
+        self.layer.masksToBounds = false
+        self.clipsToBounds = false
+    }
+}
+

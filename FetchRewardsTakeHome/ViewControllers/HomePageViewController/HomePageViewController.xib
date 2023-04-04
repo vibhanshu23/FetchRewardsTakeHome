@@ -23,9 +23,8 @@
                     <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
-                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="jKa-dt-qcx">
-                            <rect key="frame" x="48" y="198" width="295" height="612"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="jKa-dt-qcx">
+                            <rect key="frame" x="16" y="154" width="358" height="656"/>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="dMJ-F6-soT">
                                 <size key="itemSize" width="128" height="128"/>
@@ -35,21 +34,29 @@
                             </collectionViewFlowLayout>
                             <cells/>
                         </collectionView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Dessert" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e3Z-zh-6cV">
-                            <rect key="frame" x="56" y="127" width="60" height="21"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Desserts" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e3Z-zh-6cV">
+                            <rect key="frame" x="32" y="79" width="326" height="43"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="36"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
                     <viewLayoutGuide key="safeArea" id="Vn1-aS-JnS"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="e3Z-zh-6cV" firstAttribute="leading" secondItem="Vn1-aS-JnS" secondAttribute="leading" constant="32" id="2Z0-0O-Xie"/>
+                        <constraint firstItem="Vn1-aS-JnS" firstAttribute="trailing" secondItem="e3Z-zh-6cV" secondAttribute="trailing" constant="32" id="2g3-PA-gNQ"/>
+                        <constraint firstItem="jKa-dt-qcx" firstAttribute="top" secondItem="e3Z-zh-6cV" secondAttribute="bottom" constant="32" id="AuU-zm-lzl"/>
+                        <constraint firstItem="e3Z-zh-6cV" firstAttribute="top" secondItem="Vn1-aS-JnS" secondAttribute="top" constant="32" id="bCJ-gh-cx1"/>
+                        <constraint firstItem="Vn1-aS-JnS" firstAttribute="trailing" secondItem="jKa-dt-qcx" secondAttribute="trailing" constant="16" id="oWP-R1-wLh"/>
+                        <constraint firstItem="Vn1-aS-JnS" firstAttribute="bottom" secondItem="jKa-dt-qcx" secondAttribute="bottom" id="xMB-RB-Ayq"/>
+                        <constraint firstItem="jKa-dt-qcx" firstAttribute="leading" secondItem="Vn1-aS-JnS" secondAttribute="leading" constant="16" id="yQ2-m9-Eb1"/>
+                    </constraints>
                 </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-            <point key="canvasLocation" x="23" y="-11"/>
+            <point key="canvasLocation" x="21.538461538461537" y="-11.374407582938389"/>
         </view>
     </objects>
     <resources>
