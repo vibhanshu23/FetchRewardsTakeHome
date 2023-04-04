@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct NetworkHandler {
 
@@ -41,5 +42,19 @@ struct NetworkHandler {
             }
         }
         task.resume()
+    }
+
+    static func getImageFor(url: String, completion: @escaping ((UIImage) -> Void)) {
+
+                DispatchQueue.global().async {
+                    if let data = try? Data(contentsOf: URL(string: url)!) { //TODO: error handling of invalid URL
+                        if let image = UIImage(data: data) {
+                            DispatchQueue.main.async {
+                                completion(image)
+                            }
+                        }
+                    }
+                }
+
     }
 }

@@ -223,8 +223,9 @@ class Meal{
     let imageURL: String
     let id: String
     var image: UIImage = Utilities.getDefaultImage()
+    var isImageDownloaded = false
 
-    init(name: String, imageURL: String, id: String, image:UIImage?) {
+    init(name: String, imageURL: String, id: String, image: UIImage?) {
         self.name = name
         self.imageURL = imageURL
         self.id = id
@@ -232,6 +233,11 @@ class Meal{
             self.image = image
         }
 
+    }
+
+    func updateMealWithImage(image: UIImage){
+        self.image = image
+        self.isImageDownloaded = true
     }
 
 }

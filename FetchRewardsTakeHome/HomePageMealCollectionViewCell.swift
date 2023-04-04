@@ -16,6 +16,14 @@ class HomePageMealCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        imgItem.alpha = 0.5
+        imgItem.contentMode = .scaleAspectFill
+
+        lblName.backgroundColor = .black.withAlphaComponent(0.3)
+        lblName.textColor = .white
+        lblName.font = .systemFont(ofSize: 24)
+        lblName.numberOfLines = 0
+        
     }
 
     func configure(with meal:Meal){
@@ -23,6 +31,15 @@ class HomePageMealCollectionViewCell: UICollectionViewCell {
         self.lblName.text = meal.name
         self.imgItem.image = meal.image
 
+
+        if meal.imageURL != "", !meal.isImageDownloaded {
+            NetworkHandler.getImageFor(url: meal.imageURL) { image in
+                meal.updateMealWithImage(image: image)
+                self.lblName.text = meal.name
+                self.imgItem.image = image
+            }
+
+        }
     }
     
 
