@@ -13,6 +13,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
 
+        
         let viewModel = MealViewModel()
         viewModel.getMealList { arrMeals in
             for item in arrMeals{
