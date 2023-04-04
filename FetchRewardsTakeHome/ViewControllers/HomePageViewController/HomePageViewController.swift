@@ -10,6 +10,10 @@ import UIKit
 
 class HomePageViewController: UIViewController {
 
+    @IBOutlet weak var vwLoading: UIView!
+    @IBOutlet weak var lblLoading: UILabel!
+    @IBOutlet weak var btnCloseError: UIButton!
+    @IBOutlet weak var btnRetry: UIButton!
     @IBOutlet weak var cvMealList: UICollectionView!
     
     let viewModel = ViewModel()//Future scope: dependency injection
@@ -28,19 +32,81 @@ class HomePageViewController: UIViewController {
 //        flowLayout.estimatedItemSize = CGSize(width: self.view.bounds.width, height: 100 )
         cvMealList.collectionViewLayout = flowLayout
 
-        //Future Scope - show Loading
+        btnCloseError.isHidden = true
+        let symbolConfig = UIImage.SymbolConfiguration(pointSize: 20)
+        btnCloseError.setImage(
+            UIImage(systemName: "xmark.circle", withConfiguration: symbolConfig)!,
+            for: .normal
+        )
+        btnCloseError.setTitle("", for: .normal)
 
+        btnRetry.isHidden = true
+
+        lblLoading.textAlignment = .center
+        lblLoading.numberOfLines = 0
+
+        fetchDataFromServer()
+
+    }
+
+    func fetchDataFromServer(){
+        showLoading()
         viewModel.getMealList { arrMeals, error in
-
+            self.hideLoading()
             guard error == nil else {
-                //TODO:- ERROR HANDLING
+                self.showError(
+                    error: error?.localizedDescription ?? "Some unknown Error Occured",
+                    withRetryButton: true
+                )
                 return
             }
             self.cvMealList.reloadData()
         }
-
     }
 
+    func showLoading(){
+        view.bringSubviewToFront(vwLoading)
+        lblLoading.text = "Loading ..."
+        vwLoading.isHidden = false
+    }
+
+    func hideLoading(){
+        view.sendSubviewToBack(vwLoading)
+        lblLoading.text = ""
+        vwLoading.isHidden = true
+    }
+
+    func showError(
+        error:String,
+        withRetryButton isShowingRetry:Bool = false
+    ){
+        view.bringSubviewToFront(vwLoading)
+        lblLoading.text = error
+        vwLoading.isHidden = false
+        if (isShowingRetry) {
+            btnRetry.isHidden = false
+            btnCloseError.isHidden = true
+        }
+        else{
+            btnRetry.isHidden = true
+            btnCloseError.isHidden = false
+        }
+    }
+
+    func hideError(){
+        btnCloseError.isHidden = true
+        btnRetry.isHidden = true
+
+        hideLoading()
+    }
+
+    @IBAction func onClickCloseError(_ sender: Any) {
+        hideError()
+    }
+    @IBAction func onClickRetry(_ sender: Any) {
+        hideError()
+        fetchDataFromServer()
+    }
 }
 
 extension HomePageViewController:
@@ -66,11 +132,15 @@ extension HomePageViewController:
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let item = self.viewModel.displayMealList[indexPath.row]
 
+        showLoading()
         viewModel.getMealDetails { mealDetail, error in
+            self.hideLoading()
 
             guard let mealDetail = mealDetail, error == nil else {
-                return //TODO: Error handling
+                self.showError(error: error?.localizedDescription ?? "Some unknown Error Occured")
+                return
             }
+
 
             self.navigationController?.pushViewController(
                 DetailViewController(mealDetail: mealDetail),

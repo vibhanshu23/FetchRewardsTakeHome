@@ -27,9 +27,8 @@ class ViewModel {
             if error != nil {
                 DispatchQueue.main.async {
                     completion([Meal](), error)
-                    return
-//            TODO: Do error handling
                 }
+                return
             }
             for item in response!.meals {
                 self.originalMealList.append(item.getInterfaceObject())
@@ -59,7 +58,6 @@ class ViewModel {
         ){ (response:MealDTO<[MealDetailsObjectFromServer]>?, error) in
             guard error == nil
             else {
-//                TODO: Do error handling
                 DispatchQueue.main.async {
                     completion(nil, error)
                 }

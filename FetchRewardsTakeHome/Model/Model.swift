@@ -248,7 +248,6 @@ class MealDetail {
     var ingredients = [Ingredient]() //Future Scope - Error handling for null array
     var image: UIImage
 
-    //TODO: Check if arg should be nullable
     init(name: String, instructions: String, ingredients: [Ingredient], image: UIImage? = nil) {
         self.name = name
         self.instructions = instructions

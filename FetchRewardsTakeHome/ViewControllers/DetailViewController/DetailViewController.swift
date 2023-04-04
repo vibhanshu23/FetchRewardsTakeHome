@@ -9,6 +9,9 @@ import UIKit
 
 class DetailViewController: UIViewController {
 
+
+    //TODO: Test on smaller screens
+
     @IBOutlet weak var lblName: UILabel!
     @IBOutlet weak var tblIngredients: UITableView!
     @IBOutlet weak var lblInstructions: UILabel!
