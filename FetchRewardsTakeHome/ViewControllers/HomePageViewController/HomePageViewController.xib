@@ -10,12 +10,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomePageViewController" customModule="FetchRewardsTakeHome" customModuleProvider="target">
             <connections>
-                <outlet property="btnCloseError" destination="7KU-qy-Z9N" id="CuY-EL-eVQ"/>
-                <outlet property="btnRetry" destination="Xch-Di-My9" id="fwS-aC-vJl"/>
                 <outlet property="cvMealList" destination="jKa-dt-qcx" id="oYy-KC-wwK"/>
-                <outlet property="lblLoading" destination="opm-ve-WHz" id="oXN-Pq-Mu6"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
-                <outlet property="vwLoading" destination="tpt-IB-9YX" id="Cca-VO-ZNy"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -23,48 +19,6 @@
             <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view alpha="0.97999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tpt-IB-9YX">
-                    <rect key="frame" x="0.0" y="47" width="390" height="763"/>
-                    <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7KU-qy-Z9N">
-                            <rect key="frame" x="302" y="48" width="40" height="40"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="40" id="pAo-I3-B2z"/>
-                                <constraint firstAttribute="height" constant="40" id="rEY-ss-ZoC"/>
-                            </constraints>
-                            <state key="normal" title="Button"/>
-                            <buttonConfiguration key="configuration" style="plain" title="Button"/>
-                            <connections>
-                                <action selector="onClickCloseError:" destination="-1" eventType="touchUpInside" id="9jK-Zf-tss"/>
-                            </connections>
-                        </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading ......." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="opm-ve-WHz">
-                            <rect key="frame" x="48" y="371.33333333333331" width="294" height="20.333333333333314"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xch-Di-My9">
-                            <rect key="frame" x="162.66666666666666" y="696.66666666666663" width="64.666666666666657" height="34.333333333333371"/>
-                            <state key="normal" title="Button"/>
-                            <buttonConfiguration key="configuration" style="gray" title="Retry"/>
-                            <connections>
-                                <action selector="onClickRetry:" destination="-1" eventType="touchUpInside" id="rCT-13-s34"/>
-                            </connections>
-                        </button>
-                    </subviews>
-                    <color key="backgroundColor" systemColor="systemBrownColor"/>
-                    <constraints>
-                        <constraint firstAttribute="bottom" secondItem="Xch-Di-My9" secondAttribute="bottom" constant="32" id="379-Yd-5qP"/>
-                        <constraint firstItem="opm-ve-WHz" firstAttribute="centerY" secondItem="tpt-IB-9YX" secondAttribute="centerY" id="8zj-xs-tcL"/>
-                        <constraint firstAttribute="trailing" secondItem="7KU-qy-Z9N" secondAttribute="trailing" constant="48" id="DXn-PW-HVu"/>
-                        <constraint firstItem="Xch-Di-My9" firstAttribute="centerX" secondItem="tpt-IB-9YX" secondAttribute="centerX" id="KlK-gs-61H"/>
-                        <constraint firstAttribute="trailing" secondItem="opm-ve-WHz" secondAttribute="trailing" constant="48" id="Sq9-d1-55e"/>
-                        <constraint firstItem="opm-ve-WHz" firstAttribute="leading" secondItem="tpt-IB-9YX" secondAttribute="leading" constant="48" id="U3O-fF-T7e"/>
-                        <constraint firstItem="7KU-qy-Z9N" firstAttribute="top" secondItem="tpt-IB-9YX" secondAttribute="top" constant="48" id="Zt9-84-bps"/>
-                        <constraint firstItem="opm-ve-WHz" firstAttribute="centerX" secondItem="tpt-IB-9YX" secondAttribute="centerX" id="vxG-Q3-Oat"/>
-                    </constraints>
-                </view>
                 <view contentMode="scaleToFill" id="Cte-QU-DfZ">
                     <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -82,7 +36,7 @@
                         </collectionView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Desserts" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e3Z-zh-6cV">
                             <rect key="frame" x="32" y="79" width="326" height="43"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="36"/>
+                            <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="36"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
@@ -102,21 +56,12 @@
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-            <constraints>
-                <constraint firstItem="tpt-IB-9YX" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="QGt-J1-0W7"/>
-                <constraint firstItem="tpt-IB-9YX" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="UrI-f4-6uQ"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="tpt-IB-9YX" secondAttribute="bottom" id="iIK-YA-bO5"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="tpt-IB-9YX" secondAttribute="trailing" id="ko1-UF-jI0"/>
-            </constraints>
             <point key="canvasLocation" x="21.538461538461537" y="-11.374407582938389"/>
         </view>
     </objects>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemBrownColor">
-            <color red="0.63529411764705879" green="0.51764705882352946" blue="0.36862745098039218" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

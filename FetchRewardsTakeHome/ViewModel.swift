@@ -7,14 +7,32 @@
 
 import Foundation
 
-class ViewModel {
+//MARK: Dependency injection
+
+protocol ViewModelDependency{
+
+    func getMealList(completion: @escaping ([Meal], Error?) -> Void)
+    func getMealDetails(completion: @escaping (MealDetail?, Error?) -> Void)
+}
+
+class ViewModelDependencyClass: ViewModelDependency{
+    func getMealList(completion: @escaping ([Meal], Error?) -> Void) {}
+    func getMealDetails(completion: @escaping (MealDetail?, Error?) -> Void) {}
+}
+
+//MARK: Model
+class ViewModel: ViewModelDependency {
 
     var originalMealList = [Meal]()
     var displayMealList = [Meal]()
     var currentDetailObject: MealDetail?
-    init(){}
+    let dependency: ViewModelDependency
 
-//MARK: Network Interface
+    init(withDependency: ViewModelDependency){
+        self.dependency = withDependency
+    }
+
+    //MARK: Network Interface
     func getMealList(completion: @escaping ([Meal], Error?) -> Void) {
         guard let url = URL(string: MEALSURL)
         else {
@@ -43,14 +61,10 @@ class ViewModel {
         }
     }
 
-
-
-    //MARK: Meal Detail
-
     func getMealDetails(completion: @escaping (MealDetail?, Error?) -> Void){
         guard let urlDetails = URL(string: MEALDETAILSURL + "53049")
         else {
-//                TODO: Do error handling
+            //                TODO: Do error handling
             return
         }
         NetworkHandler.makeAPICall(

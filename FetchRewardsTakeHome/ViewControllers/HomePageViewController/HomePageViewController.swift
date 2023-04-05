@@ -8,15 +8,11 @@
 import UIKit
 
 
-class HomePageViewController: UIViewController {
+class HomePageViewController: BaseViewController {
 
-    @IBOutlet weak var vwLoading: UIView!
-    @IBOutlet weak var lblLoading: UILabel!
-    @IBOutlet weak var btnCloseError: UIButton!
-    @IBOutlet weak var btnRetry: UIButton!
     @IBOutlet weak var cvMealList: UICollectionView!
     
-    let viewModel = ViewModel()//Future scope: dependency injection
+    let viewModel = ViewModel(withDependency: ViewModelDependencyClass())
 
 
     override func viewDidLoad() {
@@ -32,27 +28,14 @@ class HomePageViewController: UIViewController {
 //        flowLayout.estimatedItemSize = CGSize(width: self.view.bounds.width, height: 100 )
         cvMealList.collectionViewLayout = flowLayout
 
-        btnCloseError.isHidden = true
-        let symbolConfig = UIImage.SymbolConfiguration(pointSize: 20)
-        btnCloseError.setImage(
-            UIImage(systemName: "xmark.circle", withConfiguration: symbolConfig)!,
-            for: .normal
-        )
-        btnCloseError.setTitle("", for: .normal)
-
-        btnRetry.isHidden = true
-
-        lblLoading.textAlignment = .center
-        lblLoading.numberOfLines = 0
-
         fetchDataFromServer()
 
     }
 
     func fetchDataFromServer(){
-        showLoading()
+        showLoadingScreen()
         viewModel.getMealList { arrMeals, error in
-            self.hideLoading()
+            self.debug() //DEBUG
             guard error == nil else {
                 self.showError(
                     error: error?.localizedDescription ?? "Some unknown Error Occured",
@@ -60,53 +43,31 @@ class HomePageViewController: UIViewController {
                 )
                 return
             }
+            self.showContent()
             self.cvMealList.reloadData()
         }
     }
 
-    func showLoading(){
-        view.bringSubviewToFront(vwLoading)
-        lblLoading.text = "Loading ..."
-        vwLoading.isHidden = false
-    }
-
-    func hideLoading(){
-        view.sendSubviewToBack(vwLoading)
-        lblLoading.text = ""
-        vwLoading.isHidden = true
-    }
-
-    func showError(
-        error:String,
-        withRetryButton isShowingRetry:Bool = false
-    ){
-        view.bringSubviewToFront(vwLoading)
-        lblLoading.text = error
-        vwLoading.isHidden = false
-        if (isShowingRetry) {
-            btnRetry.isHidden = false
-            btnCloseError.isHidden = true
-        }
-        else{
-            btnRetry.isHidden = true
-            btnCloseError.isHidden = false
-        }
-    }
-
-    func hideError(){
-        btnCloseError.isHidden = true
-        btnRetry.isHidden = true
-
-        hideLoading()
-    }
-
-    @IBAction func onClickCloseError(_ sender: Any) {
-        hideError()
-    }
-    @IBAction func onClickRetry(_ sender: Any) {
-        hideError()
+    @objc override func onClickRetry(){
         fetchDataFromServer()
     }
+
+    //MARK: Debug
+    func debug(){
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            self.showLoadingScreen()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                self.showError(error: "With Retry Button",withRetryButton: true )
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                    self.showError(error: "Without Retry", withRetryButton: false)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                        self.showContent()
+                    }
+                }
+            }
+        }
+    }
+
 }
 
 extension HomePageViewController:
@@ -132,9 +93,8 @@ extension HomePageViewController:
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let item = self.viewModel.displayMealList[indexPath.row]
 
-        showLoading()
+        showLoadingScreen()
         viewModel.getMealDetails { mealDetail, error in
-            self.hideLoading()
 
             guard let mealDetail = mealDetail, error == nil else {
                 self.showError(error: error?.localizedDescription ?? "Some unknown Error Occured")
@@ -168,13 +128,5 @@ extension HomePageViewController:
 //        let height = cell?.contentView.systemLayoutSizeFitting(CGSize(width: width, height: 0)).height
 //        return height ?? 100
 //    }
-
-
-
-
-
-
-
-
 
 }
