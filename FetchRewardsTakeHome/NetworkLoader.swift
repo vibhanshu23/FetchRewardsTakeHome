@@ -10,10 +10,13 @@ import UIKit
 
 struct NetworkHandler {
 
-    static func makeAPICall<T:Codable>(with url: URL, completion: @escaping ((T?, Error?) -> Void)){
+    var session: URLSession
 
-        //TODO: Generics or no
-        let session = URLSession.shared
+    init(session: URLSession = URLSession.shared){
+        self.session = session
+    }
+
+    func makeAPICall<T:Codable>(with url: URL, completion: @escaping ((T?, Error?) -> Void)){
 
         let task = session.dataTask(with: url) { data, response, error in
             //TODO: Consider checking data, response, and error if valid network response is recevied instead of force unwrapping the data
@@ -33,7 +36,7 @@ struct NetworkHandler {
 
                 }
                 catch let jsonError as NSError{
-                    completion(nil, jsonError)
+                    completion(data as? T, jsonError)
                 }
             }
             else{ //data = nil
@@ -44,7 +47,22 @@ struct NetworkHandler {
         task.resume()
     }
 
-    static func getImageFor(url: String, completion: @escaping ((UIImage) -> Void)) {
+    func makeAPICall<T:Codable>(with url: String, completion: @escaping ((T?, Error?) -> Void)){
+        makeAPICall(with: URL(string: url)!, completion: completion)
+    }
+
+    func getImageFor(url: String, completion: @escaping ((UIImage) -> Void)) {
+
+        makeAPICall(with: url) { (response:Data?, error) in
+            if let image = UIImage(data: response!) {
+                DispatchQueue.main.async {
+                    completion(image)
+                }
+            }
+            else {
+                completion(Utilities.getDefaultImage())
+            }
+        }
 
                 DispatchQueue.global().async {
                     if let data = try? Data(contentsOf: URL(string: url)!) { //TODO: error handling of invalid URL

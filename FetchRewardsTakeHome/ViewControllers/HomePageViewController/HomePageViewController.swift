@@ -35,7 +35,7 @@ class HomePageViewController: BaseViewController {
     func fetchDataFromServer(){
         showLoadingScreen()
         viewModel.getMealList { arrMeals, error in
-            self.debug() //DEBUG
+//            self.debug() //DEBUG
             guard error == nil else {
                 self.showError(
                     error: error?.localizedDescription ?? "Some unknown Error Occured",

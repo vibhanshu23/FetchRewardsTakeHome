@@ -36,7 +36,7 @@ class HomePageMealCollectionViewCell: UICollectionViewCell {
 
 
         if meal.imageURL != "", !meal.isImageDownloaded {
-            NetworkHandler.getImageFor(url: meal.imageURL) { image in
+            NetworkHandler().getImageFor(url: meal.imageURL) { image in
                 meal.updateMealWithImage(image: image)
                 self.lblName.text = meal.name
                 self.imgItem.image = image

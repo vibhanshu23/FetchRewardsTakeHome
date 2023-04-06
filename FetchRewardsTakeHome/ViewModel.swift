@@ -39,7 +39,7 @@ class ViewModel: ViewModelDependency {
             //        TODO: Do error handling
             return
         }
-        NetworkHandler.makeAPICall(with: url){
+        NetworkHandler().makeAPICall(with: url){
             (response:MealDTO<[MealObjectFromServer]>?, error) in
 
             if error != nil {
@@ -67,7 +67,7 @@ class ViewModel: ViewModelDependency {
             //                TODO: Do error handling
             return
         }
-        NetworkHandler.makeAPICall(
+        NetworkHandler().makeAPICall(
             with: urlDetails
         ){ (response:MealDTO<[MealDetailsObjectFromServer]>?, error) in
             guard error == nil
