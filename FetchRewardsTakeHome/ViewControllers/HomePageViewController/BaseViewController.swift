@@ -106,17 +106,20 @@ class BaseViewController: UIViewController {
     }()
 
 
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        showContent() //FIXME:
+    }
 
     // MARK: - Methods
 
     func showLoadingScreen() {
-        hideErrorScreen()
+        showContent()
         isLoadingScreenShowing = true
         view.addSubview(loadingScreenView)
         loadingScreenView.translatesAutoresizingMaskIntoConstraints = false
@@ -133,7 +136,7 @@ class BaseViewController: UIViewController {
         error:String,
         withRetryButton isShowingRetry:Bool = false
     ){
-        hideErrorScreen()
+        showContent()
         isErrorScreenShowing = true
         errorLabel.text = error
         retryButton.isHidden = !isShowingRetry
