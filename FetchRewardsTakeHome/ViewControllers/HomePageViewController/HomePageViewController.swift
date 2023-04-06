@@ -25,7 +25,6 @@ class HomePageViewController: BaseViewController {
             forCellWithReuseIdentifier: "HomePageMealCollectionViewCell"
         )
         let flowLayout = UICollectionViewFlowLayout()
-//        flowLayout.estimatedItemSize = CGSize(width: self.view.bounds.width, height: 100 )
         cvMealList.collectionViewLayout = flowLayout
 
         fetchDataFromServer()
@@ -91,7 +90,7 @@ extension HomePageViewController:
 
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let item = self.viewModel.displayMealList[indexPath.row]
+        _ = self.viewModel.displayMealList[indexPath.row]
 
         showLoadingScreen()
         viewModel.getMealDetails { mealDetail, error in
@@ -100,8 +99,6 @@ extension HomePageViewController:
                 self.showError(error: error?.localizedDescription ?? "Some unknown Error Occured")
                 return
             }
-
-
             self.navigationController?.pushViewController(
                 DetailViewController(mealDetail: mealDetail),
                 animated: true
@@ -111,22 +108,7 @@ extension HomePageViewController:
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-//        let cellWidth = collectionView.bounds.width
-//        let cellHeight = calculateHeightForCell(at: indexPath, with: cellWidth)
         return CGSize(width: collectionView.bounds.width, height: 100)
-
     }
-
-//    func calculateHeightForCell(at indexPath: IndexPath, with width: CGFloat) -> CGFloat {
-//        let item = self.viewModel.displayMealList[indexPath.row]
-//        let cell = self.cvMealList.cellForItem(at: indexPath) as? HomePageMealCollectionViewCell
-//        cell?.contentView.layoutIfNeeded()
-//        cell?.configure(with: item)
-//        cell?.contentView.frame = CGRect(x: 0, y: 0, width: width, height: 0)
-//        cell?.contentView.layoutIfNeeded()
-//        let height = cell?.contentView.systemLayoutSizeFitting(CGSize(width: width, height: 0)).height
-//        return height ?? 100
-//    }
 
 }

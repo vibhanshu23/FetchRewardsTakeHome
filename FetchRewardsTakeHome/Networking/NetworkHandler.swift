@@ -19,7 +19,6 @@ struct NetworkHandler {
     func makeAPICall<T:Codable>(with url: URL, completion: @escaping ((T?, Error?) -> Void)){
 
         let task = session.dataTask(with: url) { data, response, error in
-            //TODO: Consider checking data, response, and error if valid network response is recevied instead of force unwrapping the data
             guard error == nil
             else {
                 completion(nil, error)
@@ -28,8 +27,7 @@ struct NetworkHandler {
             }
             if let data = data {
                 do{
-//                TODO: check errors, check data
-                    print(response)
+//                    print(response)
                     let responseObject = try JSONDecoder().decode(T.self, from: data)
                     completion(responseObject, nil)
                     //TODO: dispatch on main queue

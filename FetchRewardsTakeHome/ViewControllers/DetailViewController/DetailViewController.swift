@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DetailViewController: UIViewController {
+class DetailViewController: BaseViewController {
 
 
     //TODO: Test on smaller screens
@@ -78,7 +78,6 @@ class DetailViewController: UIViewController {
     }
 
     func reloadScrollViewContent(){
-
             scrollView.contentSize = CGSize(
                 width: self.view.bounds.width,
                 height: scrollView.contentSize.height + tblIngredients.bounds.height
@@ -93,7 +92,6 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.textLabel?.text = self.mealDetail?.ingredients[indexPath.row].displayName
         return cell

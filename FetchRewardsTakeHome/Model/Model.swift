@@ -234,7 +234,7 @@ class Meal: Equatable{
         self.name = name
         self.imageURL = imageURL
         self.id = id
-        if var image = image {
+        if let image = image {
             self.image = image
         }
 

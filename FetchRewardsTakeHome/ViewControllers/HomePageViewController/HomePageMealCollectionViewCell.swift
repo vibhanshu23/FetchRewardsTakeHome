@@ -34,16 +34,13 @@ class HomePageMealCollectionViewCell: UICollectionViewCell {
         self.lblName.text = meal.name
         self.imgItem.image = meal.image
 
-
         if meal.imageURL != "", !meal.isImageDownloaded {
             ViewModel().getImageFor(url: meal.imageURL) { image in
                 meal.updateMealWithImage(image: image)
                 self.lblName.text = meal.name
                 self.imgItem.image = image
             }
-
         }
     }
-    
 
 }
