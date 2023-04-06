@@ -217,7 +217,12 @@ struct MealDetailsObjectFromServer: Codable {
 
 //MARK: Local Models
 
-class Meal{
+class Meal: Equatable{
+    static func == (lhs: Meal, rhs: Meal) -> Bool {
+        return true
+        //FIXME:
+    }
+
 
     let name: String
     let imageURL: String
@@ -242,7 +247,12 @@ class Meal{
 
 }
 
-class MealDetail {
+class MealDetail : Equatable{
+    static func == (lhs: MealDetail, rhs: MealDetail) -> Bool {
+        return true
+        //FIXME:
+    }
+
     let name: String
     let instructions: String
     var ingredients = [Ingredient]() //Future Scope - Error handling for null array

@@ -6,18 +6,20 @@
 //
 
 import Foundation
+import UIKit
 
 //MARK: Dependency injection
 
 protocol ViewModelDependency{
-
     func getMealList(completion: @escaping ([Meal], Error?) -> Void)
     func getMealDetails(completion: @escaping (MealDetail?, Error?) -> Void)
+    func getImageFor(url: String, completion: @escaping ((UIImage) -> Void))
 }
 
-class ViewModelDependencyClass: ViewModelDependency{
+class ViewModelDependencyClass: ViewModelDependency{ //TODO: check for dependency injection in open source projects
     func getMealList(completion: @escaping ([Meal], Error?) -> Void) {}
     func getMealDetails(completion: @escaping (MealDetail?, Error?) -> Void) {}
+    func getImageFor(url: String, completion: @escaping ((UIImage) -> Void)) {}
 }
 
 //MARK: Model
@@ -27,19 +29,21 @@ class ViewModel: ViewModelDependency {
     var displayMealList = [Meal]()
     var currentDetailObject: MealDetail?
     let dependency: ViewModelDependency
+    let networkHandler: NetworkHandler
 
-    init(withDependency: ViewModelDependency){
+    init(withDependency: ViewModelDependency = ViewModelDependencyClass(), andNetworkHandler: NetworkHandler = NetworkHandler()){
         self.dependency = withDependency
+        self.networkHandler = andNetworkHandler
     }
 
     //MARK: Network Interface
     func getMealList(completion: @escaping ([Meal], Error?) -> Void) {
         guard let url = URL(string: MEALSURL)
         else {
-            //        TODO: Do error handling
+            //FUTURE: Do error handling
             return
         }
-        NetworkHandler().makeAPICall(with: url){
+        networkHandler.makeAPICall(with: url){
             (response:MealDTO<[MealObjectFromServer]>?, error) in
 
             if error != nil {
@@ -64,10 +68,10 @@ class ViewModel: ViewModelDependency {
     func getMealDetails(completion: @escaping (MealDetail?, Error?) -> Void){
         guard let urlDetails = URL(string: MEALDETAILSURL + "53049")
         else {
-            //                TODO: Do error handling
+            //FUTURE: Do error handling
             return
         }
-        NetworkHandler().makeAPICall(
+        networkHandler.makeAPICall(
             with: urlDetails
         ){ (response:MealDTO<[MealDetailsObjectFromServer]>?, error) in
             guard error == nil
@@ -80,6 +84,20 @@ class ViewModel: ViewModelDependency {
             self.currentDetailObject = response!.meals[0].getInterfaceObject()
             DispatchQueue.main.async {
                 completion(self.currentDetailObject!, nil)
+            }
+        }
+    }
+
+    func getImageFor(url: String, completion: @escaping ((UIImage) -> Void)) {
+        
+        networkHandler.makeAPICall(with: url) { (response:Data?, error) in
+            if let image = UIImage(data: response!) {
+                DispatchQueue.main.async {
+                    completion(image)
+                }
+            }
+            else {
+                completion(Utilities.getDefaultImage())
             }
         }
 

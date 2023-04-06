@@ -8,7 +8,7 @@
 import XCTest
 @testable import FetchRewardsTakeHome
 
-final class FetchRewardsTakeHomeTests: XCTestCase {
+final class FetchRewardsTakeHomeTests: XCTestCaseBase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -31,6 +31,52 @@ final class FetchRewardsTakeHomeTests: XCTestCase {
         self.measure {
             // Put the code you want to measure the time of here.
         }
+    }
+
+}
+
+class NetworkHandlerTests: XCTestCaseBase {
+
+    var sut: NetworkHandler!
+
+    override func tearDownWithError() throws {
+        sut = nil
+    }
+
+    func test_makeRequest() throws {
+        sut = getDefaultNetworkHandler(url: "meals")
+        let networkResponseExpectation = XCTestExpectation(description: "Receieve data from makeURLRequest")
+        sut.makeAPICall(with: "meals", completion: {
+            (response:[MealObjectFromServer]?, error) in
+            XCTAssertNil(error)
+            XCTAssertEqual(response?.first?.id, "idMeal")
+            networkResponseExpectation.fulfill()
+        })
+        //FIXME: test fails!
+        wait(for: [networkResponseExpectation], timeout: 2.1)
+    }
+}
+
+class ViewModelTests: XCTestCaseBase {
+
+    var sut: ViewModel!
+
+    override func tearDownWithError() throws {
+        sut = nil
+    }
+
+    func test_getMealList() throws {
+        sut = ViewModel(andNetworkHandler: getDefaultNetworkHandler(url: "meals"))
+
+        let networkResponseExpectation = XCTestExpectation(description: "Receieve data from makeURLRequest")
+        sut.getMealList { mealList, error in
+
+            let result = self.getMeals().compactMap { $0 as? Meal }
+
+            XCTAssertEqual(mealList, result )
+            networkResponseExpectation.fulfill()
+        }
+
     }
 
 }

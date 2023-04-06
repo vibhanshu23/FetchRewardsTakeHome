@@ -179,16 +179,266 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "F2E13275-C31F-4BFA-8F81-53608E0DC6D0"
+            uuid = "240ED3C4-5C1A-40D8-89BE-0D6DEB3081D7"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "FetchRewardsTakeHome/ViewControllers/HomePageViewController/HomePageViewController.swift"
+            filePath = "FetchRewardsTakeHome/NetworkLoader.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "83"
-            endingLineNumber = "83"
-            landmarkName = "showError(error:withRetryButton:)"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
+            landmarkName = "makeAPICall(with:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "20D42523-C770-47C6-B7BB-56F694C24F93"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FetchRewardsTakeHomeTests/FetchRewardsTakeHomeTests.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
+            landmarkName = "test_makeRequest()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "20D42523-C770-47C6-B7BB-56F694C24F93 - 22fdd012970c1458"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;FetchRewardsTakeHome.MealObjectFromServer&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in FetchRewardsTakeHomeTests.NetworkHandlerTests.test_makeRequest() throws -&gt; ()"
+                  moduleName = "FetchRewardsTakeHomeTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vibhanshujain/Documents/GitHub/FetchRewardsTakeHome/FetchRewardsTakeHomeTests/FetchRewardsTakeHomeTests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "197"
+                  endingLineNumber = "197"
+                  offsetFromSymbolStart = "105">
+               </Location>
+               <Location
+                  uuid = "20D42523-C770-47C6-B7BB-56F694C24F93 - 8ee5280311c3af5d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;Swift.Array&lt;FetchRewardsTakeHome.MealObjectFromServer&gt;&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in FetchRewardsTakeHomeTests.NetworkHandlerTests.test_makeRequest() throws -&gt; ()"
+                  moduleName = "FetchRewardsTakeHomeTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vibhanshujain/Documents/GitHub/FetchRewardsTakeHome/FetchRewardsTakeHomeTests/FetchRewardsTakeHomeTests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "197"
+                  endingLineNumber = "197"
+                  offsetFromSymbolStart = "123">
+               </Location>
+               <Location
+                  uuid = "20D42523-C770-47C6-B7BB-56F694C24F93 - 8ee5280311c39daf"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;Swift.Array&lt;FetchRewardsTakeHome.MealObjectFromServer&gt;&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in FetchRewardsTakeHomeTests.NetworkHandlerTests.test_makeRequest() throws -&gt; ()"
+                  moduleName = "FetchRewardsTakeHomeTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vibhanshujain/Documents/GitHub/FetchRewardsTakeHome/FetchRewardsTakeHomeTests/FetchRewardsTakeHomeTests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "51"
+                  endingLineNumber = "51"
+                  offsetFromSymbolStart = "123">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2E046088-4C3A-4A17-B2CA-4676BF8A4A73"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FetchRewardsTakeHomeTests/FetchRewardsTakeHomeTests.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "49"
+            endingLineNumber = "49"
+            landmarkName = "test_makeRequest()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "2E046088-4C3A-4A17-B2CA-4676BF8A4A73 - b901fe5f896b0058"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "FetchRewardsTakeHomeTests.NetworkHandlerTests.test_makeRequest() throws -&gt; ()"
+                  moduleName = "FetchRewardsTakeHomeTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vibhanshujain/Documents/GitHub/FetchRewardsTakeHome/FetchRewardsTakeHomeTests/FetchRewardsTakeHomeTests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "195"
+                  endingLineNumber = "195"
+                  offsetFromSymbolStart = "244">
+               </Location>
+               <Location
+                  uuid = "2E046088-4C3A-4A17-B2CA-4676BF8A4A73 - 22fdd012970c1458"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;FetchRewardsTakeHome.MealObjectFromServer&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in FetchRewardsTakeHomeTests.NetworkHandlerTests.test_makeRequest() throws -&gt; ()"
+                  moduleName = "FetchRewardsTakeHomeTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vibhanshujain/Documents/GitHub/FetchRewardsTakeHome/FetchRewardsTakeHomeTests/FetchRewardsTakeHomeTests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "197"
+                  endingLineNumber = "197"
+                  offsetFromSymbolStart = "105">
+               </Location>
+               <Location
+                  uuid = "2E046088-4C3A-4A17-B2CA-4676BF8A4A73 - b901fe5f896b0058"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "FetchRewardsTakeHomeTests.NetworkHandlerTests.test_makeRequest() throws -&gt; ()"
+                  moduleName = "FetchRewardsTakeHomeTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vibhanshujain/Documents/GitHub/FetchRewardsTakeHome/FetchRewardsTakeHomeTests/FetchRewardsTakeHomeTests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "195"
+                  endingLineNumber = "195"
+                  offsetFromSymbolStart = "204">
+               </Location>
+               <Location
+                  uuid = "2E046088-4C3A-4A17-B2CA-4676BF8A4A73 - 8ee5280311c3af5d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;Swift.Array&lt;FetchRewardsTakeHome.MealObjectFromServer&gt;&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in FetchRewardsTakeHomeTests.NetworkHandlerTests.test_makeRequest() throws -&gt; ()"
+                  moduleName = "FetchRewardsTakeHomeTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vibhanshujain/Documents/GitHub/FetchRewardsTakeHome/FetchRewardsTakeHomeTests/FetchRewardsTakeHomeTests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "197"
+                  endingLineNumber = "197"
+                  offsetFromSymbolStart = "123">
+               </Location>
+               <Location
+                  uuid = "2E046088-4C3A-4A17-B2CA-4676BF8A4A73 - b901fe5f896b352e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "FetchRewardsTakeHomeTests.NetworkHandlerTests.test_makeRequest() throws -&gt; ()"
+                  moduleName = "FetchRewardsTakeHomeTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vibhanshujain/Documents/GitHub/FetchRewardsTakeHome/FetchRewardsTakeHomeTests/FetchRewardsTakeHomeTests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "49"
+                  endingLineNumber = "49"
+                  offsetFromSymbolStart = "236">
+               </Location>
+               <Location
+                  uuid = "2E046088-4C3A-4A17-B2CA-4676BF8A4A73 - 8ee5280311c39daf"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;Swift.Array&lt;FetchRewardsTakeHome.MealObjectFromServer&gt;&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in FetchRewardsTakeHomeTests.NetworkHandlerTests.test_makeRequest() throws -&gt; ()"
+                  moduleName = "FetchRewardsTakeHomeTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vibhanshujain/Documents/GitHub/FetchRewardsTakeHome/FetchRewardsTakeHomeTests/FetchRewardsTakeHomeTests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "51"
+                  endingLineNumber = "51"
+                  offsetFromSymbolStart = "123">
+               </Location>
+               <Location
+                  uuid = "2E046088-4C3A-4A17-B2CA-4676BF8A4A73 - b901fe5f896b352e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "FetchRewardsTakeHomeTests.NetworkHandlerTests.test_makeRequest() throws -&gt; ()"
+                  moduleName = "FetchRewardsTakeHomeTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vibhanshujain/Documents/GitHub/FetchRewardsTakeHome/FetchRewardsTakeHomeTests/FetchRewardsTakeHomeTests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "49"
+                  endingLineNumber = "49"
+                  offsetFromSymbolStart = "211">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "73D67889-E32A-44D8-93C8-08524AC869B6"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FetchRewardsTakeHomeTests/XCTestCaseBase.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
+            landmarkName = "getMeals()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E873B995-AC02-4979-8DF8-C2A130FDDD85"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FetchRewardsTakeHomeTests/XCTestCaseBase.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
+            landmarkName = "startLoading()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4D504D9A-DF9F-4614-9046-387BF59C523A"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FetchRewardsTakeHomeTests/XCTestCaseBase.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "101"
+            endingLineNumber = "101"
+            landmarkName = "getDefaultNetworkHandler(url:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A8744E9F-7D47-45F2-82E8-5FA59DEC548C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FetchRewardsTakeHome/NetworkLoader.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "29"
+            endingLineNumber = "29"
+            landmarkName = "makeAPICall(with:completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

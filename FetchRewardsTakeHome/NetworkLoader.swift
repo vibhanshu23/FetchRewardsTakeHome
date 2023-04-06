@@ -29,7 +29,7 @@ struct NetworkHandler {
             if let data = data {
                 do{
 //                TODO: check errors, check data
-
+                    print(response)
                     let responseObject = try JSONDecoder().decode(T.self, from: data)
                     completion(responseObject, nil)
                     //TODO: dispatch on main queue
@@ -51,28 +51,4 @@ struct NetworkHandler {
         makeAPICall(with: URL(string: url)!, completion: completion)
     }
 
-    func getImageFor(url: String, completion: @escaping ((UIImage) -> Void)) {
-
-        makeAPICall(with: url) { (response:Data?, error) in
-            if let image = UIImage(data: response!) {
-                DispatchQueue.main.async {
-                    completion(image)
-                }
-            }
-            else {
-                completion(Utilities.getDefaultImage())
-            }
-        }
-
-                DispatchQueue.global().async {
-                    if let data = try? Data(contentsOf: URL(string: url)!) { //TODO: error handling of invalid URL
-                        if let image = UIImage(data: data) {
-                            DispatchQueue.main.async {
-                                completion(image)
-                            }
-                        }
-                    }
-                }
-
-    }
 }

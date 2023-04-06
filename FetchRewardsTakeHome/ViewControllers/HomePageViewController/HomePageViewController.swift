@@ -12,7 +12,7 @@ class HomePageViewController: BaseViewController {
 
     @IBOutlet weak var cvMealList: UICollectionView!
     
-    let viewModel = ViewModel(withDependency: ViewModelDependencyClass())
+    let viewModel = ViewModel()
 
 
     override func viewDidLoad() {
