@@ -156,7 +156,6 @@
 				D4FE362929DB7C7900DCEE4A /* SceneDelegate.swift */,
 				D4FE363029DB7C7B00DCEE4A /* Assets.xcassets */,
 				D4FE363229DB7C7B00DCEE4A /* LaunchScreen.storyboard */,
-				D4FE363529DB7C7B00DCEE4A /* Info.plist */,
 			);
 			path = AppConfigFiles;
 			sourceTree = "<group>";
@@ -184,6 +183,7 @@
 		D4FE362629DB7C7900DCEE4A /* FetchRewardsTakeHome */ = {
 			isa = PBXGroup;
 			children = (
+				D4FE363529DB7C7B00DCEE4A /* Info.plist */,
 				D4FB32CC29DEC6CB0043A2E4 /* AppConfigFiles */,
 				D4B3258F29DC536B00BE2F57 /* ViewControllers */,
 				D4FB32C929DEC3E10043A2E4 /* Base Classes */,
