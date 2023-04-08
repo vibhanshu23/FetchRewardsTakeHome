@@ -18,7 +18,7 @@ class BaseViewController: UIViewController {
     var isLoadingScreenShowing = false
     var isErrorScreenShowing = false
 
-    let loadingScreenView: UIView = {
+    let vwLoadingScreen: UIView = {
         let view = UIView()
         view.backgroundColor = .white
 
@@ -44,7 +44,7 @@ class BaseViewController: UIViewController {
         return view
     }()
 
-    let errorLabel: UILabel = {
+    let lblError: UILabel = {
         let errorLabel = UILabel()
         errorLabel.text = "Oops! Something went wrong."
         errorLabel.font = UIFont.boldSystemFont(ofSize: 24)
@@ -54,52 +54,54 @@ class BaseViewController: UIViewController {
         return errorLabel
     }()
 
-    lazy var retryButton: UIButton = {
+    lazy var btnRetry: UIButton = {
         let retryButton = UIButton(type: .system)
         retryButton.setTitle("Retry", for: .normal)
         retryButton.tintColor = .white
         retryButton.addTarget(self, action: #selector(onClickRetry), for: .touchUpInside)
         retryButton.translatesAutoresizingMaskIntoConstraints = false
+        retryButton.layer.borderWidth = 1
+        retryButton.layer.borderColor = UIColor.blue.cgColor
+
         return retryButton
     }()
 
-    lazy var errorScreenView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .red
-
-        let errorImageView = UIImageView(image: UIImage(named: "error"))
-        errorImageView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(errorImageView)
-
-
-        view.addSubview(errorLabel)
-
-
+    lazy var btnClose: UIButton = {
         let closeButton = UIButton(type: .system)
-        //        closeButton.setTitle("Close", for: .normal)
         closeButton.tintColor = .white
         closeButton.addTarget(self, action: #selector(onClickCloseError), for: .touchUpInside)
         closeButton.translatesAutoresizingMaskIntoConstraints = false
-        let symbolConfig = UIImage.SymbolConfiguration(pointSize: 20)
         closeButton.setImage(
-            UIImage(systemName: "xmark.circle", withConfiguration: symbolConfig)!,
+            UIImage(systemName: "xmark.circle", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20))!,
             for: .normal
         )
         closeButton.setTitle("", for: .normal)
-        view.addSubview(closeButton)
+        return closeButton
+    }()
 
+    lazy var vwErrorScreen: UIView = {
+        let view = UIView()
+        view.backgroundColor = .gray.withAlphaComponent(0.9)
 
-        view.addSubview(retryButton)
+        let errorImageView = UIImageView(image: UIImage(systemName: "bonjour", withConfiguration: UIImage.SymbolConfiguration(pointSize: 40))!)//TODO: Check size
+        errorImageView.translatesAutoresizingMaskIntoConstraints = false
+        errorImageView.tintColor = .white//.withAlphaComponent(0.2)
+
+        view.addSubview(errorImageView)
+        view.addSubview(lblError)
+        view.addSubview(btnClose)
+        view.addSubview(btnRetry)
 
         NSLayoutConstraint.activate([
             errorImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            errorImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -60),
-            errorLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            errorLabel.topAnchor.constraint(equalTo: errorImageView.bottomAnchor, constant: 20),
-            closeButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 40),
-            closeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            retryButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            retryButton.topAnchor.constraint(equalTo: errorLabel.bottomAnchor, constant: 20)
+            errorImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -160),
+            lblError.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 80),
+            lblError.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -80),
+            lblError.topAnchor.constraint(equalTo: errorImageView.bottomAnchor, constant: 20),
+            btnClose.topAnchor.constraint(equalTo: view.topAnchor, constant: 80),
+            btnClose.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            btnRetry.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            btnRetry.topAnchor.constraint(equalTo: lblError.bottomAnchor, constant: 180)
         ])
 
         return view
@@ -113,21 +115,20 @@ class BaseViewController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        showContent() //FIXME:
     }
 
     // MARK: - Methods
 
     func showLoadingScreen() {
-        showContent()
+        hideContent()
         isLoadingScreenShowing = true
-        view.addSubview(loadingScreenView)
-        loadingScreenView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(vwLoadingScreen)
+        vwLoadingScreen.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            loadingScreenView.topAnchor.constraint(equalTo: view.topAnchor),
-            loadingScreenView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            loadingScreenView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            loadingScreenView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            vwLoadingScreen.topAnchor.constraint(equalTo: view.topAnchor),
+            vwLoadingScreen.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            vwLoadingScreen.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            vwLoadingScreen.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
 
@@ -136,24 +137,30 @@ class BaseViewController: UIViewController {
         error:String,
         withRetryButton isShowingRetry:Bool = false
     ){
-        showContent()
+        hideContent()
         isErrorScreenShowing = true
-        errorLabel.text = error
-        retryButton.isHidden = !isShowingRetry
-        view.addSubview(errorScreenView)
-        errorScreenView.translatesAutoresizingMaskIntoConstraints = false
+        lblError.text = error
+        btnRetry.isHidden = !isShowingRetry
+        btnClose.isHidden = isShowingRetry
+        view.addSubview(vwErrorScreen)
+        vwErrorScreen.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            errorScreenView.topAnchor.constraint(equalTo: view.topAnchor),
-            errorScreenView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            errorScreenView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            errorScreenView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            vwErrorScreen.topAnchor.constraint(equalTo: view.topAnchor),
+            vwErrorScreen.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            vwErrorScreen.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            vwErrorScreen.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
 
     func showContent(){
         hideErrorScreen()
         hideLoadingScreen()
-
+        super.viewWillAppear(true)
+    }
+    func hideContent(){
+        hideErrorScreen()
+        hideLoadingScreen()
+        super.viewDidAppear(true)
     }
 
     @objc func onClickCloseError(){
@@ -168,10 +175,10 @@ class BaseViewController: UIViewController {
 
     private func hideErrorScreen() {
         isErrorScreenShowing = false
-        errorScreenView.removeFromSuperview()
+        vwErrorScreen.removeFromSuperview()
     }
     private func hideLoadingScreen() {
         isLoadingScreenShowing = false
-        loadingScreenView.removeFromSuperview()
+        vwLoadingScreen.removeFromSuperview()
     }
 }

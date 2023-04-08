@@ -11,6 +11,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomePageViewController" customModule="FetchRewardsTakeHome" customModuleProvider="target">
             <connections>
                 <outlet property="cvMealList" destination="jKa-dt-qcx" id="oYy-KC-wwK"/>
+                <outlet property="lblDessert" destination="e3Z-zh-6cV" id="6wH-tR-ScR"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -24,7 +25,7 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="jKa-dt-qcx">
-                            <rect key="frame" x="16" y="154" width="358" height="656"/>
+                            <rect key="frame" x="16" y="107" width="358" height="737"/>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="dMJ-F6-soT">
                                 <size key="itemSize" width="128" height="128"/>
@@ -35,7 +36,7 @@
                             <cells/>
                         </collectionView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Desserts" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e3Z-zh-6cV">
-                            <rect key="frame" x="32" y="79" width="326" height="43"/>
+                            <rect key="frame" x="32" y="32" width="326" height="43"/>
                             <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="36"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>

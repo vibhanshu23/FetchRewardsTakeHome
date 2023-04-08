@@ -18,10 +18,15 @@ class DetailViewController: BaseViewController {
     var isInstructionsExpanded = false
 
     @IBOutlet weak var scrollView: UIScrollView!
-    let mealDetail: MealDetail?
+    var mealDetail: MealDetail?
+    let mealId: String
 
-    init(mealDetail: MealDetail){
-        self.mealDetail = mealDetail
+    var viewModel = ViewModel()
+
+    init(mealId: String){
+        self.mealId = mealId
+        mealDetail = nil
+        viewModel = ViewModel()
         super.init(nibName: "DetailViewController", bundle: nil)
     }
 
@@ -82,6 +87,20 @@ class DetailViewController: BaseViewController {
                 width: self.view.bounds.width,
                 height: scrollView.contentSize.height + tblIngredients.bounds.height
             )
+    }
+
+    func fetchDataFromServer(){
+        viewModel.getMealDetails(withMealId: mealId) { mealDetail, error in
+
+            guard let mealDetail = mealDetail, error == nil else {
+                self.showError(error: error?.localizedDescription ?? "Some unknown Error Occured")
+                return
+            }
+
+            self.checkLabelHeight()
+            self.mealDetail = mealDetail
+            //FIXME: theMealDB is down. Testing pending
+        }
     }
 
 }

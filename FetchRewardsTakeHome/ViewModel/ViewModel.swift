@@ -12,13 +12,13 @@ import UIKit
 
 protocol ViewModelDependency{
     func getMealList(completion: @escaping ([Meal], Error?) -> Void)
-    func getMealDetails(withMeal: Meal, completion: @escaping (MealDetail?, Error?) -> Void)
+    func getMealDetails(withMealId: String, completion: @escaping (MealDetail?, Error?) -> Void)
     func getImageFor(url: String, completion: @escaping ((UIImage) -> Void))
 }
 
 class ViewModelDependencyClass: ViewModelDependency{ //TODO: check for dependency injection in open source projects
     func getMealList(completion: @escaping ([Meal], Error?) -> Void) {}
-    func getMealDetails(withMeal: Meal, completion: @escaping (MealDetail?, Error?) -> Void){}
+    func getMealDetails(withMealId: String, completion: @escaping (MealDetail?, Error?) -> Void){}
     func getImageFor(url: String, completion: @escaping ((UIImage) -> Void)) {}
 }
 
@@ -28,8 +28,8 @@ class ViewModel: ViewModelDependency {
     var originalMealList = [Meal]()
     var displayMealList = [Meal]()
     var currentDetailObject: MealDetail?
-    let dependency: ViewModelDependency
-    let networkHandler: NetworkHandler
+    private let dependency: ViewModelDependency
+    private let networkHandler: NetworkHandler
 
     init(withDependency: ViewModelDependency = ViewModelDependencyClass(), andNetworkHandler: NetworkHandler = NetworkHandler()){
         self.dependency = withDependency
@@ -73,10 +73,23 @@ class ViewModel: ViewModelDependency {
                 completion(self.displayMealList, nil)
             }
         }
+        networkHandler.makeAPICall(with: url){
+            (response:[MealObjectFromServer]?, error) in
+
+            if error != nil {
+                DispatchQueue.main.async {
+                    completion([Meal](), error)
+                }
+                return
+            }
+            DispatchQueue.main.async {
+                completion(self.displayMealList, nil)
+            }
+        }
     }
 
-    func getMealDetails(withMeal: Meal, completion: @escaping (MealDetail?, Error?) -> Void){
-        guard let urlDetails = URL(string: MEALDETAILSURL + withMeal.id)
+    func getMealDetails(withMealId: String, completion: @escaping (MealDetail?, Error?) -> Void){
+        guard let urlDetails = URL(string: MEALDETAILSURL + withMealId)
         else {
             //FUTURE: Do error handling
             return

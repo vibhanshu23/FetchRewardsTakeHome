@@ -10,9 +10,9 @@ import UIKit
 class HomePageViewController: BaseViewController {
 
     @IBOutlet weak var cvMealList: UICollectionView!
-    
-    let viewModel = ViewModel()
+    @IBOutlet weak var lblDessert: UILabel!
 
+    let viewModel = ViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +28,13 @@ class HomePageViewController: BaseViewController {
 
         fetchDataFromServer()
 
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        lblDessert.text = "Desserts" //FIXME:
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        self.lblDessert.text = ""
     }
 
     func fetchDataFromServer(){
@@ -48,22 +55,6 @@ class HomePageViewController: BaseViewController {
 
     @objc override func onClickRetry(){
         fetchDataFromServer()
-    }
-
-    //MARK: Debug
-    func debug(){
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-            self.showLoadingScreen()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                self.showError(error: "With Retry Button",withRetryButton: true )
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                    self.showError(error: "Without Retry", withRetryButton: false)
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                        self.showContent()
-                    }
-                }
-            }
-        }
     }
 
 }
@@ -92,22 +83,33 @@ extension HomePageViewController:
         let meal = self.viewModel.displayMealList[indexPath.row]
 
         showLoadingScreen()
-        viewModel.getMealDetails(withMeal: meal) { mealDetail, error in
-
-            guard let mealDetail = mealDetail, error == nil else {
-                self.showError(error: error?.localizedDescription ?? "Some unknown Error Occured")
-                return
-            }
             self.navigationController?.pushViewController(
-                DetailViewController(mealDetail: mealDetail),
+                DetailViewController(mealId: meal.id),
                 animated: true
             )
 
-        }
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.bounds.width, height: 100)
     }
 
+}
+
+extension HomePageViewController{
+    //MARK: Debug
+    func debug(){
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            self.showLoadingScreen()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                self.showError(error: "With Retry Button",withRetryButton: true )
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                    self.showError(error: "Without Retry", withRetryButton: false)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                        self.showContent()
+                    }
+                }
+            }
+        }
+    }
 }

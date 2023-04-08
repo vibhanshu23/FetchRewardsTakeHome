@@ -82,7 +82,7 @@ class ViewModelTests: XCTestCaseBase {
         sut = ViewModel(andNetworkHandler: getDefaultNetworkHandler(url: .details))
 
         let networkResponseExpectation = XCTestExpectation(description: "Receieve data from makeURLRequest")
-        sut.getMealDetails(withMeal: self.getMeals()[1]) { output, error in
+        sut.getMealDetails(withMealId: self.getMeals()[1]) { output, error in
 
             let expectedOutput = self.getDetails()
 

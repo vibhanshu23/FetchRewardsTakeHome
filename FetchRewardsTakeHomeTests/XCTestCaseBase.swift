@@ -132,8 +132,6 @@ class XCTestCaseBase : XCTestCase{
     }
 
     func getServerMeals() -> [MealObjectFromServer]{
-        var arr = [MealObjectFromServer]()
-
         do {
             let decoder = JSONDecoder()
             let data = try JSONSerialization.data(withJSONObject: meals, options: [])
@@ -142,7 +140,7 @@ class XCTestCaseBase : XCTestCase{
         } catch {
             print("Error decoding JSON: \(error.localizedDescription)")
         }
-        return arr
+        return [MealObjectFromServer]()
 
     }
 
