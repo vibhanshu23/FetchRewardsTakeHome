@@ -4,6 +4,7 @@
 //
 //  Created by Vibhanshu Jain on 4/4/23.
 //
+//  This is the landing home page for the application.
 
 import UIKit
 
@@ -26,18 +27,11 @@ class HomePageViewController: BaseViewController {
         let flowLayout = UICollectionViewFlowLayout()
         cvMealList.collectionViewLayout = flowLayout
 
-        fetchDataFromServer()
+        fetchDataFromViewModel()
 
     }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        lblDessert.text = "Desserts" //FIXME:
-    }
-    override func viewDidAppear(_ animated: Bool) {
-        self.lblDessert.text = ""
-    }
 
-    func fetchDataFromServer(){
+    func fetchDataFromViewModel(){
         showLoadingScreen()
         viewModel.getMealList { arrMeals, error in
 //            self.debug() //DEBUG
@@ -54,7 +48,7 @@ class HomePageViewController: BaseViewController {
     }
 
     @objc override func onClickRetry(){
-        fetchDataFromServer()
+        fetchDataFromViewModel()
     }
 
 }
@@ -82,11 +76,10 @@ extension HomePageViewController:
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let meal = self.viewModel.displayMealList[indexPath.row]
 
-        showLoadingScreen()
-            self.navigationController?.pushViewController(
-                DetailViewController(mealId: meal.id),
-                animated: true
-            )
+        self.navigationController?.pushViewController(
+            DetailViewController(mealId: meal.id),
+            animated: true
+        )
 
     }
 

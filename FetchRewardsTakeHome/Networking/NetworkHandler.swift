@@ -4,6 +4,7 @@
 //
 //  Created by Vibhanshu Jain on 4/3/23.
 //
+//  This class contains all the networking logic
 
 import Foundation
 import UIKit
@@ -22,6 +23,8 @@ struct NetworkHandler {
             guard error == nil
             else {
                 DispatchQueue.main.async {
+                    print("*********** ERROR ***********")
+                    print(error?.localizedDescription)
                     completion(nil, error)
                 }
                 //Future scope: Implement a error handler class for platform wide errors
@@ -30,23 +33,26 @@ struct NetworkHandler {
             if let data = data {
                 do{
 //                    print(response)
-                    
+                    let jsonObject = try JSONSerialization.jsonObject(with: data, options: [])
+
                     let responseObject = try JSONDecoder().decode(T.self, from: data)
                     DispatchQueue.main.async {
                         completion(responseObject, nil)
                     }
-                    //TODO: dispatch on main queue
-
                 }
                 catch let jsonError as NSError{
                     //Future scope: Implement a error handler class for platform wide errors
                     DispatchQueue.main.async {
+                        print("*********** ERROR ***********")
+                        print(jsonError.localizedDescription)
                         completion(data as? T, jsonError)
                     }
                 }
             }
             else{ //data = nil
                 DispatchQueue.main.async {
+                    print("*********** ERROR ***********")
+                    print(error?.localizedDescription)
                     completion(nil, error)
                 }
                 //Future scope: Implement a error handler class for platform wide errors
@@ -59,8 +65,8 @@ struct NetworkHandler {
         makeAPICall(with: URL(string: url)!, completion: completion)
     }
 
-    //future scope: to make a robust solution for handling multiple endpoints
-    func makeAPICall<T:Codable>(with url: URLType, completion: @escaping ((T?, Error?) -> Void)){
+    //Used for testing
+    func makeAPICall<T:Codable>(with url: test_APIEndpoints, completion: @escaping ((T?, Error?) -> Void)){
         makeAPICall(with: URL(string: url.rawValue)!, completion: completion)
     }
 

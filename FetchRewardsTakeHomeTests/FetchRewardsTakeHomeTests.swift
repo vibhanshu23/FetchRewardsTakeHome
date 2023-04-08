@@ -49,7 +49,7 @@ class NetworkHandlerTests: XCTestCaseBase {
         sut.makeAPICall(with: .mealsUnsorted, completion: {
             (response:[MealObjectFromServer]?, error) in
             XCTAssertNil(error)
-            XCTAssertEqual(response?.first?.id, "idMeal") //TODO: change to getmeals() and remove litteral
+            XCTAssertEqual(response?.first?.id, self.getMeals().first?.id)
             networkResponseExpectation.fulfill()
         })
         //FIXME: below test fails sometimes because of timout!
@@ -82,7 +82,7 @@ class ViewModelTests: XCTestCaseBase {
         sut = ViewModel(andNetworkHandler: getDefaultNetworkHandler(url: .details))
 
         let networkResponseExpectation = XCTestExpectation(description: "Receieve data from makeURLRequest")
-        sut.getMealDetails(withMealId: self.getMeals()[1]) { output, error in
+        sut.getMealDetails(withMealId: self.getMeals()[1].id) { output, error in
 
             let expectedOutput = self.getDetails()
 

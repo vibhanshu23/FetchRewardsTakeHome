@@ -1,15 +1,13 @@
 //
-//  XCTestCaseBase.swift
-//  FetchRewardsTakeHomeTests
+//  TestingHelpers.swift
+//  FetchRewardsTakeHome
 //
-//  Created by Vibhanshu Jain on 4/6/23.
+//  Created by Vibhanshu Jain on 4/8/23.
 //
 
-import XCTest
-@testable import FetchRewardsTakeHome
+import Foundation
 
-class XCTestCaseBase : XCTestCase {
-    
+class TestingHelpers{
     let meals = [
         [        "strMeal": "Apam balik",
                  "strMealThumb": "https://www.themealdb.com/images/media/meals/adxcbq1619787919.jpg",
@@ -172,6 +170,29 @@ class XCTestCaseBase : XCTestCase {
     }
 
 
+}
 
+class URLProtocolMock: URLProtocol {
+    static var testData = [URL?: Data]()
+
+    override class func canInit(with request: URLRequest) -> Bool {
+        return true
+    }
+
+    override class func canonicalRequest(for request: URLRequest) -> URLRequest {
+        return request
+    }
+
+    override func startLoading() {
+
+        if let url = request.url {
+
+            if let data = URLProtocolMock.testData[url] {
+                self.client?.urlProtocol(self, didLoad: data)
+            }
+        }
+        self.client?.urlProtocolDidFinishLoading(self)
+    }
+    override func stopLoading() { }
 }
 

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		D419DF2329DD2B3E00CB5D97 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D419DF2229DD2B3E00CB5D97 /* BaseViewController.swift */; };
+		D48F25FE29E139B800E2F04F /* APIEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48F25FD29E139B800E2F04F /* APIEndpoints.swift */; };
+		D48F260029E13DC400E2F04F /* TestingHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48F25FF29E13DC400E2F04F /* TestingHelpers.swift */; };
 		D4B3258329DC2E0300BE2F57 /* HomePageMealCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B3258129DC2E0300BE2F57 /* HomePageMealCollectionViewCell.swift */; };
 		D4B3258429DC2E0300BE2F57 /* HomePageMealCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4B3258229DC2E0300BE2F57 /* HomePageMealCollectionViewCell.xib */; };
 		D4B3258729DC36C500BE2F57 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B3258529DC36C500BE2F57 /* DetailViewController.swift */; };
@@ -48,6 +50,8 @@
 /* Begin PBXFileReference section */
 		D419DF2229DD2B3E00CB5D97 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		D48F25FB29E0C7D500E2F04F /* FetchRewardsTakeHome.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = FetchRewardsTakeHome.xctestplan; path = FetchRewardsTakeHome.xcodeproj/FetchRewardsTakeHome.xctestplan; sourceTree = "<group>"; };
+		D48F25FD29E139B800E2F04F /* APIEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoints.swift; sourceTree = "<group>"; };
+		D48F25FF29E13DC400E2F04F /* TestingHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingHelpers.swift; sourceTree = "<group>"; };
 		D4B3258129DC2E0300BE2F57 /* HomePageMealCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageMealCollectionViewCell.swift; sourceTree = "<group>"; };
 		D4B3258229DC2E0300BE2F57 /* HomePageMealCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomePageMealCollectionViewCell.xib; sourceTree = "<group>"; };
 		D4B3258529DC36C500BE2F57 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
@@ -146,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				D4FE365E29DB7ED800DCEE4A /* NetworkHandler.swift */,
+				D48F25FD29E139B800E2F04F /* APIEndpoints.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -227,6 +232,7 @@
 			isa = PBXGroup;
 			children = (
 				D4FE365C29DB7E3400DCEE4A /* Utilities.swift */,
+				D48F25FF29E13DC400E2F04F /* TestingHelpers.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -368,12 +374,14 @@
 				D4FE365D29DB7E3400DCEE4A /* Utilities.swift in Sources */,
 				D4FE366129DBCF8C00DCEE4A /* ViewModel.swift in Sources */,
 				D4FE365F29DB7ED800DCEE4A /* NetworkHandler.swift in Sources */,
+				D48F260029E13DC400E2F04F /* TestingHelpers.swift in Sources */,
 				D4B3258329DC2E0300BE2F57 /* HomePageMealCollectionViewCell.swift in Sources */,
 				D419DF2329DD2B3E00CB5D97 /* BaseViewController.swift in Sources */,
 				D4FE365829DB7DA000DCEE4A /* Model.swift in Sources */,
 				D4FE362829DB7C7900DCEE4A /* AppDelegate.swift in Sources */,
 				D4B3258B29DC3C3D00BE2F57 /* HomePageViewController.swift in Sources */,
 				D4FE362A29DB7C7900DCEE4A /* SceneDelegate.swift in Sources */,
+				D48F25FE29E139B800E2F04F /* APIEndpoints.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -4,6 +4,9 @@
 //
 //  Created by Vibhanshu Jain on 4/3/23.
 //
+//  This file contains:
+//  The buisiness logic to convert the network object to the inferface object
+//  It will/or have the updated model for the UI
 
 import Foundation
 import UIKit
@@ -25,11 +28,11 @@ class ViewModelDependencyClass: ViewModelDependency{ //TODO: check for dependenc
 //MARK: ViewModel
 class ViewModel: ViewModelDependency {
 
-    var originalMealList = [Meal]()
     var displayMealList = [Meal]()
     var currentDetailObject: MealDetail?
     private let dependency: ViewModelDependency
     private let networkHandler: NetworkHandler
+    private var originalMealList = [Meal]()
 
     init(withDependency: ViewModelDependency = ViewModelDependencyClass(), andNetworkHandler: NetworkHandler = NetworkHandler()){
         self.dependency = withDependency
@@ -52,58 +55,54 @@ class ViewModel: ViewModelDependency {
     }
 
     //MARK: Network Interface
+    //Future scope: Create a network interface class. This would be only necessary if there are a lot of changes in the model from the server response. I believe it will be better to have a dedicated class for that purpose.
+
+
     func getMealList(completion: @escaping ([Meal], Error?) -> Void) {
-        guard let url = URL(string: MEALSURL)
-        else {
-            //FUTURE: Do error handling
-            return
-        }
-        //Future scope: Create a network interface class. This would be only necessary if there are a lot of changes in the model from the server response. I believe it will be better to have a dedicated class for that purpose.
-        networkHandler.makeAPICall(with: url){
+
+        networkHandler.makeAPICall(with: APIEndpoints.getMeals.url){
             (response:MealDTO<[MealObjectFromServer]>?, error) in
-
-            if error != nil {
-                completion([Meal](), error)
-                return
-            }
+            //DEBUG:
             DispatchQueue.main.async {
-                self.storeAndSortCurrentMealObject(response: response?.meals ?? [])
+                let debug = debug().getMeals()
+                self.storeAndSortCurrentMealObject(response: debug)
                 completion(self.displayMealList, nil)
             }
-        }
-        networkHandler.makeAPICall(with: url){
-            (response:[MealObjectFromServer]?, error) in
-
-            if error != nil {
-                completion([Meal](), error)
-                return
-            }
-            DispatchQueue.main.async {
-                completion(self.displayMealList, nil)
-            }
+//            if error != nil {
+//                completion([Meal](), error)
+//                return
+//            }
+//            DispatchQueue.main.async {
+//                self.storeAndSortCurrentMealObject(response: response?.meals ?? [])
+//                completion(self.displayMealList, nil)
+//            }
         }
     }
 
     func getMealDetails(withMealId: String, completion: @escaping (MealDetail?, Error?) -> Void){
-        guard let urlDetails = URL(string: MEALDETAILSURL + withMealId)
-        else {
-            //FUTURE: Do error handling
-            return
-        }
+
         networkHandler.makeAPICall(
-            with: urlDetails
+            with: APIEndpoints.getMealDetails(withMealId).url
         ){ (response:MealDTO<[MealDetailsObjectFromServer]>?, error) in
-            guard error == nil
-            else {
-                DispatchQueue.main.async {
-                    completion(nil, error)
-                }
-                return
-            }
-            DispatchQueue.main.async {//TODO: Can be moved to Network Class such that response is always on main thread
-                self.storeCurrentDetailObject(response: response!.meals[0])
+
+            //DEBUG:
+            DispatchQueue.main.async {
+                let debug = debug().getDetails()
+                self.storeCurrentDetailObject(response: debug)
                 completion(self.currentDetailObject!, nil)
             }
+
+//            guard error == nil
+//            else {
+//                DispatchQueue.main.async {
+//                    completion(nil, error)
+//                }
+//                return
+//            }
+//            DispatchQueue.main.async {
+//                self.storeCurrentDetailObject(response: response!.meals[0])
+//                completion(self.currentDetailObject!, nil)
+//            }
         }
     }
 

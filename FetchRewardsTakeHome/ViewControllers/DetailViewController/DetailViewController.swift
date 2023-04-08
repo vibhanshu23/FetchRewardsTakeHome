@@ -43,15 +43,12 @@ class DetailViewController: BaseViewController {
         tblIngredients.isScrollEnabled = false
 
 
-        lblName.text = mealDetail?.name
-        lblInstructions.text = mealDetail?.instructions
-        lblInstructions.numberOfLines = 3
+
 
 
         let tap = UITapGestureRecognizer(target: self, action: #selector(showMore))
         lblInstructions.addGestureRecognizer(tap)
-
-        reloadScrollViewContent()
+        fetchDataFromServer()
     }
 
     override func viewDidLayoutSubviews() {
@@ -90,19 +87,32 @@ class DetailViewController: BaseViewController {
     }
 
     func fetchDataFromServer(){
+        showLoadingScreen()
+
         viewModel.getMealDetails(withMealId: mealId) { mealDetail, error in
+
+            self.showContent()
 
             guard let mealDetail = mealDetail, error == nil else {
                 self.showError(error: error?.localizedDescription ?? "Some unknown Error Occured")
                 return
             }
 
-            self.checkLabelHeight()
             self.mealDetail = mealDetail
-            //FIXME: theMealDB is down. Testing pending
+            self.reloadViews()
+            //FIXME: theMealDB is down. Testing pending -> added local testing Data
         }
     }
 
+    func reloadViews(){
+        lblName.text = self.mealDetail?.name
+        lblInstructions.text = self.mealDetail?.instructions
+        lblInstructions.numberOfLines = 3
+        tblIngredients.reloadData()
+        
+        self.checkLabelHeight()
+        reloadScrollViewContent()
+    }
 }
 
 extension DetailViewController: UITableViewDelegate, UITableViewDataSource {

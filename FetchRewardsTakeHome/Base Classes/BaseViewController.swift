@@ -4,6 +4,8 @@
 //
 //  Created by Vibhanshu Jain on 4/4/23.
 //
+//  This class serves as the base class to any view controller in this application.
+//  Currently the purpose is scoped to show/remove error/loading screens
 
 protocol BaseViewControllerProtocol {
     func onClickRetryAction()
@@ -60,8 +62,8 @@ class BaseViewController: UIViewController {
         retryButton.tintColor = .white
         retryButton.addTarget(self, action: #selector(onClickRetry), for: .touchUpInside)
         retryButton.translatesAutoresizingMaskIntoConstraints = false
-        retryButton.layer.borderWidth = 1
-        retryButton.layer.borderColor = UIColor.blue.cgColor
+        retryButton.layer.borderWidth = 0.5
+        retryButton.layer.borderColor = UIColor.white.cgColor
 
         return retryButton
     }()
@@ -83,7 +85,7 @@ class BaseViewController: UIViewController {
         let view = UIView()
         view.backgroundColor = .gray.withAlphaComponent(0.9)
 
-        let errorImageView = UIImageView(image: UIImage(systemName: "bonjour", withConfiguration: UIImage.SymbolConfiguration(pointSize: 40))!)//TODO: Check size
+        let errorImageView = UIImageView(image: UIImage(systemName: "bonjour", withConfiguration: UIImage.SymbolConfiguration(pointSize: 40))!)
         errorImageView.translatesAutoresizingMaskIntoConstraints = false
         errorImageView.tintColor = .white//.withAlphaComponent(0.2)
 
@@ -155,12 +157,10 @@ class BaseViewController: UIViewController {
     func showContent(){
         hideErrorScreen()
         hideLoadingScreen()
-        super.viewWillAppear(true)
     }
     func hideContent(){
         hideErrorScreen()
         hideLoadingScreen()
-        super.viewDidAppear(true)
     }
 
     @objc func onClickCloseError(){
