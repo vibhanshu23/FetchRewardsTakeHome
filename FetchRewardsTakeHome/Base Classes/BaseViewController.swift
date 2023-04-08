@@ -52,6 +52,7 @@ class BaseViewController: UIViewController {
         errorLabel.font = UIFont.boldSystemFont(ofSize: 24)
         errorLabel.textColor = .white
         errorLabel.numberOfLines = 0
+        errorLabel.textAlignment = .center
         errorLabel.translatesAutoresizingMaskIntoConstraints = false
         return errorLabel
     }()

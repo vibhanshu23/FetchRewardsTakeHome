@@ -51,6 +51,20 @@ class HomePageViewController: BaseViewController {
         fetchDataFromViewModel()
     }
 
+    //DEBUG
+    @IBAction func onClickShowErrorScreen(_ sender: Any) {
+        showError(error: "This is a dummy error screen",withRetryButton: true)
+        _ = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false) { timer in
+            self.showContent()
+        }
+    }
+    @IBAction func onClickShowLoadingScreen(_ sender: Any) {
+        showLoadingScreen()
+        _ = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false) { timer in
+            self.showContent()
+        }
+
+    }
 }
 
 extension HomePageViewController:
