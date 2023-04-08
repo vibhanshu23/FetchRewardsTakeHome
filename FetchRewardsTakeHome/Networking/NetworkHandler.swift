@@ -34,6 +34,7 @@ struct NetworkHandler {
 
                 }
                 catch let jsonError as NSError{
+                    //Future scope: Implement a error handler class for platform wide errors
                     completion(data as? T, jsonError)
                 }
             }
@@ -47,6 +48,11 @@ struct NetworkHandler {
 
     func makeAPICall<T:Codable>(with url: String, completion: @escaping ((T?, Error?) -> Void)){
         makeAPICall(with: URL(string: url)!, completion: completion)
+    }
+
+    //future scope: to make a robust solution for handling multiple endpoints
+    func makeAPICall<T:Codable>(with url: URLType, completion: @escaping ((T?, Error?) -> Void)){
+        makeAPICall(with: URL(string: url.rawValue)!, completion: completion)
     }
 
 }

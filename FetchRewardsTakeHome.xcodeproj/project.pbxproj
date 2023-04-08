@@ -47,6 +47,7 @@
 
 /* Begin PBXFileReference section */
 		D419DF2229DD2B3E00CB5D97 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		D48F25FB29E0C7D500E2F04F /* FetchRewardsTakeHome.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = FetchRewardsTakeHome.xctestplan; path = FetchRewardsTakeHome.xcodeproj/FetchRewardsTakeHome.xctestplan; sourceTree = "<group>"; };
 		D4B3258129DC2E0300BE2F57 /* HomePageMealCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageMealCollectionViewCell.swift; sourceTree = "<group>"; };
 		D4B3258229DC2E0300BE2F57 /* HomePageMealCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomePageMealCollectionViewCell.xib; sourceTree = "<group>"; };
 		D4B3258529DC36C500BE2F57 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
@@ -163,6 +164,7 @@
 		D4FE361B29DB7C7900DCEE4A = {
 			isa = PBXGroup;
 			children = (
+				D48F25FB29E0C7D500E2F04F /* FetchRewardsTakeHome.xctestplan */,
 				D4FE362629DB7C7900DCEE4A /* FetchRewardsTakeHome */,
 				D4FE363D29DB7C7B00DCEE4A /* FetchRewardsTakeHomeTests */,
 				D4FE364729DB7C7B00DCEE4A /* FetchRewardsTakeHomeUITests */,

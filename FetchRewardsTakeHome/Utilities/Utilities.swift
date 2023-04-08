@@ -12,6 +12,12 @@ let BASEURL = "https://themealdb.com/api/json/v1/1/"
 let MEALSURL = BASEURL + "filter.php?c=Dessert"
 let MEALDETAILSURL = BASEURL + "lookup.php?i="
 
+enum URLType: String{ //used for unit testing currently
+    case meals = "meals"
+    case details = "details"
+}
+
+
 class Utilities{
     static func getDefaultImage() -> UIImage{
         let symbolConfig = UIImage.SymbolConfiguration(pointSize: 40)
@@ -22,7 +28,7 @@ class Utilities{
 
 extension String{
     func checkNull() -> String?{
-        if self == "" {
+        if self == "" || self == " " {
             return nil
         }
         else{

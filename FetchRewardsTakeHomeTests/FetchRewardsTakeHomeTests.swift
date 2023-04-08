@@ -44,15 +44,15 @@ class NetworkHandlerTests: XCTestCaseBase {
     }
 
     func test_makeRequest() throws {
-        sut = getDefaultNetworkHandler(url: "meals")
+        sut = getDefaultNetworkHandler(url: .meals)
         let networkResponseExpectation = XCTestExpectation(description: "Receieve data from makeURLRequest")
-        sut.makeAPICall(with: "meals", completion: {
+        sut.makeAPICall(with: .meals, completion: {
             (response:[MealObjectFromServer]?, error) in
             XCTAssertNil(error)
             XCTAssertEqual(response?.first?.id, "idMeal")
             networkResponseExpectation.fulfill()
         })
-        //FIXME: test fails!
+        //FIXME: below test fails sometimes because of timout!
         wait(for: [networkResponseExpectation], timeout: 2.1)
     }
 }
@@ -66,17 +66,29 @@ class ViewModelTests: XCTestCaseBase {
     }
 
     func test_getMealList() throws {
-        sut = ViewModel(andNetworkHandler: getDefaultNetworkHandler(url: "meals"))
+        sut = ViewModel(andNetworkHandler: getDefaultNetworkHandler(url: .meals))
 
         let networkResponseExpectation = XCTestExpectation(description: "Receieve data from makeURLRequest")
         sut.getMealList { mealList, error in
 
-            let result = self.getMeals().compactMap { $0 as? Meal }
+            let result = self.getMeals()
 
             XCTAssertEqual(mealList, result )
             networkResponseExpectation.fulfill()
         }
 
+    }
+    func test_getMealDetails() throws {
+        sut = ViewModel(andNetworkHandler: getDefaultNetworkHandler(url: .details))
+
+        let networkResponseExpectation = XCTestExpectation(description: "Receieve data from makeURLRequest")
+        sut.getMealDetails(withMeal: self.getMeals()[1]) { mealDetail, error in
+
+            let result = self.getDetails()
+
+            XCTAssertEqual(mealDetail, result )
+            networkResponseExpectation.fulfill()
+        }
     }
 
 }

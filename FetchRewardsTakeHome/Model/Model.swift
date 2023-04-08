@@ -134,7 +134,7 @@ struct MealDetailsObjectFromServer: Codable {
         case measurement20 = "strMeasure20"
     }
 
-    func getInterfaceObject () -> MealDetail{
+    func getInterfaceObjectAndRemoveNullValues () -> MealDetail{
 
         var finalArr = [Ingredient]()
 
@@ -250,7 +250,7 @@ class Meal: Equatable{
 class MealDetail : Equatable{
     static func == (lhs: MealDetail, rhs: MealDetail) -> Bool {
         return true
-        //FIXME:
+        //FIXME: future scope
     }
 
     let name: String

@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 class HomePageViewController: BaseViewController {
 
     @IBOutlet weak var cvMealList: UICollectionView!
@@ -90,10 +89,10 @@ extension HomePageViewController:
 
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        _ = self.viewModel.displayMealList[indexPath.row]
+        let meal = self.viewModel.displayMealList[indexPath.row]
 
         showLoadingScreen()
-        viewModel.getMealDetails { mealDetail, error in
+        viewModel.getMealDetails(withMeal: meal) { mealDetail, error in
 
             guard let mealDetail = mealDetail, error == nil else {
                 self.showError(error: error?.localizedDescription ?? "Some unknown Error Occured")

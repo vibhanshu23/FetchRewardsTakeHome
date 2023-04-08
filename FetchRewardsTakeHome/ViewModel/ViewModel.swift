@@ -12,13 +12,13 @@ import UIKit
 
 protocol ViewModelDependency{
     func getMealList(completion: @escaping ([Meal], Error?) -> Void)
-    func getMealDetails(completion: @escaping (MealDetail?, Error?) -> Void)
+    func getMealDetails(withMeal: Meal, completion: @escaping (MealDetail?, Error?) -> Void)
     func getImageFor(url: String, completion: @escaping ((UIImage) -> Void))
 }
 
 class ViewModelDependencyClass: ViewModelDependency{ //TODO: check for dependency injection in open source projects
     func getMealList(completion: @escaping ([Meal], Error?) -> Void) {}
-    func getMealDetails(completion: @escaping (MealDetail?, Error?) -> Void) {}
+    func getMealDetails(withMeal: Meal, completion: @escaping (MealDetail?, Error?) -> Void){}
     func getImageFor(url: String, completion: @escaping ((UIImage) -> Void)) {}
 }
 
@@ -36,6 +36,12 @@ class ViewModel: ViewModelDependency {
         self.networkHandler = andNetworkHandler
     }
 
+
+    //MARK: Store netwrok responses
+    func storeCurrentDetailObject(response: MealDetailsObjectFromServer){
+        self.currentDetailObject = response.getInterfaceObjectAndRemoveNullValues()
+    }
+
     //MARK: Network Interface
     func getMealList(completion: @escaping ([Meal], Error?) -> Void) {
         guard let url = URL(string: MEALSURL)
@@ -43,6 +49,7 @@ class ViewModel: ViewModelDependency {
             //FUTURE: Do error handling
             return
         }
+        //Future scope: Create a network interface class. This would be only necessary if there are a lot of changes in the model from the server response. I believe it will be better to have a dedicated class for that purpose.
         networkHandler.makeAPICall(with: url){
             (response:MealDTO<[MealObjectFromServer]>?, error) in
 
@@ -65,8 +72,8 @@ class ViewModel: ViewModelDependency {
         }
     }
 
-    func getMealDetails(completion: @escaping (MealDetail?, Error?) -> Void){
-        guard let urlDetails = URL(string: MEALDETAILSURL + "53049")
+    func getMealDetails(withMeal: Meal, completion: @escaping (MealDetail?, Error?) -> Void){
+        guard let urlDetails = URL(string: MEALDETAILSURL + withMeal.id)
         else {
             //FUTURE: Do error handling
             return
@@ -81,8 +88,8 @@ class ViewModel: ViewModelDependency {
                 }
                 return
             }
-            self.currentDetailObject = response!.meals[0].getInterfaceObject()
-            DispatchQueue.main.async {
+            DispatchQueue.main.async {//TODO: Can be moved to Network Class such that response is always on main thread
+                self.storeCurrentDetailObject(response: response!.meals[0])
                 completion(self.currentDetailObject!, nil)
             }
         }
