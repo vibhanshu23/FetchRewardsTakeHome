@@ -22,7 +22,7 @@ class ViewModelDependencyClass: ViewModelDependency{ //TODO: check for dependenc
     func getImageFor(url: String, completion: @escaping ((UIImage) -> Void)) {}
 }
 
-//MARK: Model
+//MARK: ViewModel
 class ViewModel: ViewModelDependency {
 
     var originalMealList = [Meal]()
@@ -37,9 +37,18 @@ class ViewModel: ViewModelDependency {
     }
 
 
-    //MARK: Store netwrok responses
+    //MARK: Store network responses
     func storeCurrentDetailObject(response: MealDetailsObjectFromServer){
         self.currentDetailObject = response.getInterfaceObjectAndRemoveNullValues()
+    }
+
+    func storeAndSortCurrentMealObject(response: [MealObjectFromServer]){
+        for item in response {
+            self.originalMealList.append(item.getInterfaceObject())
+        }
+        self.displayMealList = self.originalMealList.sorted { meal1, meal2 in
+            meal1.name < meal2.name
+        }
     }
 
     //MARK: Network Interface
@@ -59,14 +68,8 @@ class ViewModel: ViewModelDependency {
                 }
                 return
             }
-            for item in response!.meals {
-                self.originalMealList.append(item.getInterfaceObject())
-            }
-            self.displayMealList = self.originalMealList.sorted { meal1, meal2 in
-                meal1.name < meal2.name
-            }
-
             DispatchQueue.main.async {
+                self.storeAndSortCurrentMealObject(response: response?.meals ?? [])
                 completion(self.displayMealList, nil)
             }
         }

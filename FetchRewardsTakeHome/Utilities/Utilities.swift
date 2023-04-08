@@ -13,6 +13,7 @@ let MEALSURL = BASEURL + "filter.php?c=Dessert"
 let MEALDETAILSURL = BASEURL + "lookup.php?i="
 
 enum URLType: String{ //used for unit testing currently
+    case mealsUnsorted = "mealsUnsorted"
     case meals = "meals"
     case details = "details"
 }
