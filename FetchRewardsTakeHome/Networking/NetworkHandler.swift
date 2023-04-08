@@ -21,25 +21,34 @@ struct NetworkHandler {
         let task = session.dataTask(with: url) { data, response, error in
             guard error == nil
             else {
-                completion(nil, error)
+                DispatchQueue.main.async {
+                    completion(nil, error)
+                }
                 //Future scope: Implement a error handler class for platform wide errors
                 return
             }
             if let data = data {
                 do{
 //                    print(response)
+                    
                     let responseObject = try JSONDecoder().decode(T.self, from: data)
-                    completion(responseObject, nil)
+                    DispatchQueue.main.async {
+                        completion(responseObject, nil)
+                    }
                     //TODO: dispatch on main queue
 
                 }
                 catch let jsonError as NSError{
                     //Future scope: Implement a error handler class for platform wide errors
-                    completion(data as? T, jsonError)
+                    DispatchQueue.main.async {
+                        completion(data as? T, jsonError)
+                    }
                 }
             }
             else{ //data = nil
-                completion(nil, error)
+                DispatchQueue.main.async {
+                    completion(nil, error)
+                }
                 //Future scope: Implement a error handler class for platform wide errors
             }
         }

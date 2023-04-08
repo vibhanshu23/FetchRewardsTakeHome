@@ -63,9 +63,7 @@ class ViewModel: ViewModelDependency {
             (response:MealDTO<[MealObjectFromServer]>?, error) in
 
             if error != nil {
-                DispatchQueue.main.async {
-                    completion([Meal](), error)
-                }
+                completion([Meal](), error)
                 return
             }
             DispatchQueue.main.async {
@@ -77,9 +75,7 @@ class ViewModel: ViewModelDependency {
             (response:[MealObjectFromServer]?, error) in
 
             if error != nil {
-                DispatchQueue.main.async {
-                    completion([Meal](), error)
-                }
+                completion([Meal](), error)
                 return
             }
             DispatchQueue.main.async {
