@@ -554,6 +554,7 @@
 				DEVELOPMENT_TEAM = NY37U8R2HF;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FetchRewardsTakeHome/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = RecipeHut;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
@@ -585,6 +586,7 @@
 				DEVELOPMENT_TEAM = NY37U8R2HF;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FetchRewardsTakeHome/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = RecipeHut;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
