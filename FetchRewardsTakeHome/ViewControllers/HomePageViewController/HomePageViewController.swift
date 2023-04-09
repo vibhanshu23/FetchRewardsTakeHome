@@ -34,8 +34,9 @@ class HomePageViewController: BaseViewController {
     func fetchDataFromViewModel(){
         showLoadingScreen()
         viewModel.getMealList { arrMeals, error in
-//            self.debug() //DEBUG
-            guard error == nil else {
+//            //DEBUG
+//            self.debug()
+            guard error == nil, arrMeals.count != 0 else {
                 self.showError(
                     error: error?.localizedDescription ?? "Some unknown Error Occured",
                     withRetryButton: true
@@ -43,7 +44,6 @@ class HomePageViewController: BaseViewController {
                 return
             }
             self.showContent()
-            self.cvMealList.reloadData()
         }
     }
 
@@ -51,7 +51,6 @@ class HomePageViewController: BaseViewController {
         fetchDataFromViewModel()
     }
 
-    //DEBUG
     @IBAction func onClickShowErrorScreen(_ sender: Any) {
         showError(error: "This is a dummy error screen",withRetryButton: true)
         _ = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false) { timer in
@@ -64,6 +63,10 @@ class HomePageViewController: BaseViewController {
             self.showContent()
         }
 
+    }
+    override func showContent() {
+        super.showContent()
+        self.cvMealList.reloadData()
     }
 }
 
@@ -104,19 +107,19 @@ extension HomePageViewController:
 }
 
 extension HomePageViewController{
-    //MARK: Debug
-    func debug(){
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-            self.showLoadingScreen()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                self.showError(error: "With Retry Button",withRetryButton: true )
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                    self.showError(error: "Without Retry", withRetryButton: false)
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                        self.showContent()
-                    }
-                }
-            }
-        }
-    }
+//    //MARK: Debug
+//    func debug(){
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+//            self.showLoadingScreen()
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+//                self.showError(error: "With Retry Button",withRetryButton: true )
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+//                    self.showError(error: "Without Retry", withRetryButton: false)
+//                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+//                        self.showContent()
+//                    }
+//                }
+//            }
+//        }
+//    }
 }

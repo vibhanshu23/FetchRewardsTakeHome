@@ -15,7 +15,7 @@ enum test_APIEndpoints: String{ //used for unit testing
 
 enum APIEndpoints {
 
-    private static let baseURL = URL(string: "https://themealdb.com/api/json/v1/1/")!
+    private static let baseURL = "https://themealdb.com/api/json/v1/1/"
 
     case getMeals
     case getMealDetails(String)
@@ -23,10 +23,10 @@ enum APIEndpoints {
     var url: URL {
         switch self {
             case .getMeals:
-                return APIEndpoints.baseURL.appending(path: "filter.php?c=Dessert")
+                return URL(string: APIEndpoints.baseURL + "filter.php?c=Dessert")!
 
             case .getMealDetails(let mealId):
-                return APIEndpoints.baseURL.appending(path: "lookup.php?i=\(mealId)")
+                return URL(string: APIEndpoints.baseURL + "lookup.php?i=\(mealId)")!
         }
     }
 

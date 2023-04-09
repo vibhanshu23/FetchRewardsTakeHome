@@ -62,20 +62,21 @@ class ViewModel: ViewModelDependency {
 
         networkHandler.makeAPICall(with: APIEndpoints.getMeals.url){
             (response:MealDTO<[MealObjectFromServer]>?, error) in
-            //DEBUG:
-            DispatchQueue.main.async {
-                let debug = debug().getMeals()
-                self.storeAndSortCurrentMealObject(response: debug)
-                completion(self.displayMealList, nil)
-            }
-//            if error != nil {
-//                completion([Meal](), error)
-//                return
-//            }
+            
+//            //DEBUG:
 //            DispatchQueue.main.async {
-//                self.storeAndSortCurrentMealObject(response: response?.meals ?? [])
+//                let debug = debug().getMeals()
+//                self.storeAndSortCurrentMealObject(response: debug)
 //                completion(self.displayMealList, nil)
 //            }
+            if error != nil, response != nil {
+                completion([Meal](), error)
+                return
+            }
+            DispatchQueue.main.async {
+                self.storeAndSortCurrentMealObject(response: response?.meals ?? [])
+                completion(self.displayMealList, nil)
+            }
         }
     }
 
@@ -85,24 +86,24 @@ class ViewModel: ViewModelDependency {
             with: APIEndpoints.getMealDetails(withMealId).url
         ){ (response:MealDTO<[MealDetailsObjectFromServer]>?, error) in
 
-            //DEBUG:
-            DispatchQueue.main.async {
-                let debug = debug().getDetails()
-                self.storeCurrentDetailObject(response: debug)
-                completion(self.currentDetailObject!, nil)
-            }
-
-//            guard error == nil
-//            else {
-//                DispatchQueue.main.async {
-//                    completion(nil, error)
-//                }
-//                return
-//            }
+//            //DEBUG:
 //            DispatchQueue.main.async {
-//                self.storeCurrentDetailObject(response: response!.meals[0])
+//                let debug = debug().getDetails()
+//                self.storeCurrentDetailObject(response: debug)
 //                completion(self.currentDetailObject!, nil)
 //            }
+
+            guard error == nil, let response = response
+            else {
+                DispatchQueue.main.async {
+                    completion(nil, error)
+                }
+                return
+            }
+            DispatchQueue.main.async {
+                self.storeCurrentDetailObject(response: response.meals[0])
+                completion(self.currentDetailObject!, nil)
+            }
         }
     }
 
