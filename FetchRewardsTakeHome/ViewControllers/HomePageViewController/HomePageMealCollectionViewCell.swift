@@ -31,7 +31,6 @@ class HomePageMealCollectionViewCell: UICollectionViewCell {
     }
 
     func configure(with meal:Meal){
-
         self.lblName.text = meal.name
         self.imgItem.image = meal.image
 

@@ -59,7 +59,6 @@ class ViewModel: ViewModelDependency {
 
 
     func getMealList(completion: @escaping ([Meal], NetworkError?) -> Void) {
-
         networkHandler.makeAPICall(with: APIEndpoints.getMeals){
             (response:MealDTO<[MealObjectFromServer]>?, error) in
             
@@ -81,7 +80,6 @@ class ViewModel: ViewModelDependency {
     }
 
     func getMealDetails(withMealId: String, completion: @escaping (MealDetail?, NetworkError?) -> Void){
-
         networkHandler.makeAPICall(
             with: APIEndpoints.getMealDetails(withMealId)
         ){ (response:MealDTO<[MealDetailsObjectFromServer]>?, error) in
@@ -108,7 +106,6 @@ class ViewModel: ViewModelDependency {
     }
 
     func getImageFor(url: String, completion: @escaping ((UIImage) -> Void)) {
-        
         networkHandler.makeAPICall(with: APIEndpoints.custom(url)) { (response:Data?, error) in
             if let image = UIImage(data: response!) {
                 DispatchQueue.main.async {

@@ -96,7 +96,6 @@ class TestingHelpers{
     let dummyURL = URL(string: "https://www.nyonyacooking.com/recipes/apam-balik~SJ5WuvsDf9WQ")
 
     func getDetails() -> MealDetail{
-
         let decoder = JSONDecoder()
         let data = try! JSONSerialization.data(withJSONObject: details, options: [])
         let meal = try! decoder.decode(MealDetailsObjectFromServer.self, from: data)
@@ -120,9 +119,8 @@ class TestingHelpers{
         return arr
 
     }
-
+    
     func getServerDetails() -> MealDetailsObjectFromServer{
-
         let decoder = JSONDecoder()
         let data = try! JSONSerialization.data(withJSONObject: details, options: [])
         return try! decoder.decode(MealDetailsObjectFromServer.self, from: data)
@@ -184,9 +182,7 @@ class URLProtocolMock: URLProtocol {
     }
 
     override func startLoading() {
-
         if let url = request.url {
-
             if let data = URLProtocolMock.testData[url] {
                 self.client?.urlProtocol(self, didLoad: data)
             }

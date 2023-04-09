@@ -99,7 +99,6 @@ class ViewModelTests: XCTestCaseBase {
 
     
     func test_storeAndSortCurrentMealObject() throws {
-
         sut = ViewModel(andNetworkHandler: getDefaultNetworkHandler(url: .meals))
         sut.storeAndSortCurrentMealObject(response: getServerMeals())
 
@@ -122,7 +121,6 @@ class Modal: XCTestCaseBase {
     }
 
     func test_updateMealWithImage() throws {
-
         sut = Meal(name: "test", imageURL: "test", id: "test", image: nil)
         let expectedOutput = Utilities.getDefaultImage()
 

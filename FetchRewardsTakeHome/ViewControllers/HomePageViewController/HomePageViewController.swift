@@ -81,7 +81,6 @@ extension HomePageViewController:
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomePageMealCollectionViewCell", for: indexPath) as! HomePageMealCollectionViewCell
         let item = self.viewModel.displayMealList[indexPath.row]
         cell.configure(with: item)

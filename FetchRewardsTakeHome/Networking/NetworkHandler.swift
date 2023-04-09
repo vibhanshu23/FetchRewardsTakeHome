@@ -28,7 +28,6 @@ struct NetworkHandler {
 
     
     func handlePlatformErrors(with error: NetworkError?) -> NetworkError?{
-
         guard let errror = error else {
             return error
         }
@@ -51,7 +50,6 @@ struct NetworkHandler {
 
 //MARK: Private
     private func makeAPICall<T:Codable>(with url: URL, completion: @escaping ((T?, NetworkError?) -> Void)){
-
         let task = session.dataTask(with: url) { data, response, error in
             guard error == nil
             else {
@@ -72,9 +70,7 @@ struct NetworkHandler {
                 return
             }
             guard let data = data else{
-
                 completion(nil, handlePlatformErrors(with: .networkError))
-
                 return
             }
             do{

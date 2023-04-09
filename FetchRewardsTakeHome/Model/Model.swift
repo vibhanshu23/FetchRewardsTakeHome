@@ -135,7 +135,6 @@ struct MealDetailsObjectFromServer: Codable {
     }
 
     func getInterfaceObjectAndRemoveNullValues () -> MealDetail{
-
         var finalArr = [Ingredient]()
 
         if let ingredient1 = self.ingredient1?.checkNull(),  let measurement1 = self.measurement1?.checkNull() {
@@ -209,9 +208,6 @@ struct MealDetailsObjectFromServer: Codable {
         )
         return localObjectCopy
     }
-
-    
-
 
 }
 

@@ -98,7 +98,6 @@ class XCTestCaseBase : XCTestCase {
     let dummyURL = URL(string: "https://www.nyonyacooking.com/recipes/apam-balik~SJ5WuvsDf9WQ")
 
     func getDetails() -> MealDetail{
-
         let decoder = JSONDecoder()
         let data = try! JSONSerialization.data(withJSONObject: details, options: [])
         let meal = try! decoder.decode(MealDetailsObjectFromServer.self, from: data)
@@ -124,13 +123,15 @@ class XCTestCaseBase : XCTestCase {
     }
 
     func getServerDetails() -> MealDetailsObjectFromServer{
-
         let decoder = JSONDecoder()
         let data = try! JSONSerialization.data(withJSONObject: details, options: [])
         return try! decoder.decode(MealDetailsObjectFromServer.self, from: data)
 
     }
 
+
+
+    
     func getServerMeals() -> [MealObjectFromServer]{
         do {
             let decoder = JSONDecoder()

@@ -40,10 +40,6 @@ class DetailViewController: BaseViewController {
         tblIngredients.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         tblIngredients.isScrollEnabled = false
 
-
-
-
-
         let tap = UITapGestureRecognizer(target: self, action: #selector(showMore))
         lblInstructions.addGestureRecognizer(tap)
         fetchDataFromServer()
@@ -80,7 +76,6 @@ class DetailViewController: BaseViewController {
     }
 
     func reloadScrollViewContent(){
-
         var height = 0.0
         for viewItem in vwScroll.subviews{
             if viewItem is UITableView{
