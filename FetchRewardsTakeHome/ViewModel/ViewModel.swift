@@ -14,14 +14,14 @@ import UIKit
 //MARK: Dependency injection
 
 protocol ViewModelDependency{
-    func getMealList(completion: @escaping ([Meal], Error?) -> Void)
-    func getMealDetails(withMealId: String, completion: @escaping (MealDetail?, Error?) -> Void)
+    func getMealList(completion: @escaping ([Meal], NetworkError?) -> Void)
+    func getMealDetails(withMealId: String, completion: @escaping (MealDetail?, NetworkError?) -> Void)
     func getImageFor(url: String, completion: @escaping ((UIImage) -> Void))
 }
 
 class ViewModelDependencyClass: ViewModelDependency{ //TODO: check for dependency injection in open source projects
-    func getMealList(completion: @escaping ([Meal], Error?) -> Void) {}
-    func getMealDetails(withMealId: String, completion: @escaping (MealDetail?, Error?) -> Void){}
+    func getMealList(completion: @escaping ([Meal], NetworkError?) -> Void) {}
+    func getMealDetails(withMealId: String, completion: @escaping (MealDetail?, NetworkError?) -> Void){}
     func getImageFor(url: String, completion: @escaping ((UIImage) -> Void)) {}
 }
 
@@ -58,9 +58,9 @@ class ViewModel: ViewModelDependency {
     //Future scope: Create a network interface class. This would be only necessary if there are a lot of changes in the model from the server response. I believe it will be better to have a dedicated class for that purpose.
 
 
-    func getMealList(completion: @escaping ([Meal], Error?) -> Void) {
+    func getMealList(completion: @escaping ([Meal], NetworkError?) -> Void) {
 
-        networkHandler.makeAPICall(with: APIEndpoints.getMeals.url){
+        networkHandler.makeAPICall(with: APIEndpoints.getMeals){
             (response:MealDTO<[MealObjectFromServer]>?, error) in
             
 //            //DEBUG:
@@ -69,7 +69,7 @@ class ViewModel: ViewModelDependency {
 //                self.storeAndSortCurrentMealObject(response: debug)
 //                completion(self.displayMealList, nil)
 //            }
-            if error != nil, response != nil {
+            guard error != nil || response != nil else{
                 completion([Meal](), error)
                 return
             }
@@ -80,10 +80,10 @@ class ViewModel: ViewModelDependency {
         }
     }
 
-    func getMealDetails(withMealId: String, completion: @escaping (MealDetail?, Error?) -> Void){
+    func getMealDetails(withMealId: String, completion: @escaping (MealDetail?, NetworkError?) -> Void){
 
         networkHandler.makeAPICall(
-            with: APIEndpoints.getMealDetails(withMealId).url
+            with: APIEndpoints.getMealDetails(withMealId)
         ){ (response:MealDTO<[MealDetailsObjectFromServer]>?, error) in
 
 //            //DEBUG:
@@ -109,7 +109,7 @@ class ViewModel: ViewModelDependency {
 
     func getImageFor(url: String, completion: @escaping ((UIImage) -> Void)) {
         
-        networkHandler.makeAPICall(with: url) { (response:Data?, error) in
+        networkHandler.makeAPICall(with: APIEndpoints.custom(url)) { (response:Data?, error) in
             if let image = UIImage(data: response!) {
                 DispatchQueue.main.async {
                     completion(image)

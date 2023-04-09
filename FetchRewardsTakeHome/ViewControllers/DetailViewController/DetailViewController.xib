@@ -12,9 +12,9 @@
             <connections>
                 <outlet property="lblInstructions" destination="35w-eB-xow" id="aDH-mT-Der"/>
                 <outlet property="lblName" destination="HR3-oM-rKW" id="jEb-aL-UVP"/>
-                <outlet property="scrollView" destination="z5S-pC-qUt" id="Cgg-NJ-NxN"/>
                 <outlet property="tblIngredients" destination="i3Z-YT-FEG" id="UE8-ET-G42"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="vwScroll" destination="z5S-pC-qUt" id="ja2-YG-b6H"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>

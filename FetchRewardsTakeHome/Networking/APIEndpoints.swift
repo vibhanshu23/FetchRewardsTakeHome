@@ -19,6 +19,7 @@ enum APIEndpoints {
 
     case getMeals
     case getMealDetails(String)
+    case custom(String)
 
     var url: URL {
         switch self {
@@ -27,6 +28,8 @@ enum APIEndpoints {
 
             case .getMealDetails(let mealId):
                 return URL(string: APIEndpoints.baseURL + "lookup.php?i=\(mealId)")!
+            case .custom(let url):
+                return URL(string:url)!
         }
     }
 

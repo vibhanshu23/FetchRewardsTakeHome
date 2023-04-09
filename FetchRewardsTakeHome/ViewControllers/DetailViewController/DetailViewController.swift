@@ -15,17 +15,15 @@ class DetailViewController: BaseViewController {
     @IBOutlet weak var lblName: UILabel!
     @IBOutlet weak var tblIngredients: UITableView!
     @IBOutlet weak var lblInstructions: UILabel!
+    @IBOutlet weak var vwScroll: UIScrollView!
     var isInstructionsExpanded = false
 
-    @IBOutlet weak var scrollView: UIScrollView!
-    var mealDetail: MealDetail?
     let mealId: String
 
     var viewModel = ViewModel()
 
     init(mealId: String){
         self.mealId = mealId
-        mealDetail = nil
         viewModel = ViewModel()
         super.init(nibName: "DetailViewController", bundle: nil)
     }
@@ -57,6 +55,8 @@ class DetailViewController: BaseViewController {
     }
 
     @objc func showMore() {
+        lblInstructions.layoutIfNeeded()
+
         if !isInstructionsExpanded {
             lblInstructions.numberOfLines = 0
         }
@@ -80,10 +80,41 @@ class DetailViewController: BaseViewController {
     }
 
     func reloadScrollViewContent(){
-            scrollView.contentSize = CGSize(
-                width: self.view.bounds.width,
-                height: scrollView.contentSize.height + tblIngredients.bounds.height
-            )
+
+        var height = 0.0
+        for viewItem in vwScroll.subviews{
+            if viewItem is UITableView{
+                continue
+            }
+            else if viewItem is UILabel{
+                let modifiedHeight = viewItem.frame.minX + viewItem.intrinsicContentSize.height
+                if modifiedHeight > height{
+                    height = modifiedHeight
+                }
+            }
+        }
+        height = height + tblIngredients.contentSize.height
+        vwScroll.contentSize = CGSize(width: self.view.frame.width, height: height)
+        vwScroll.layoutIfNeeded()
+        view.layoutIfNeeded()
+
+    }
+
+    override func showContent(){
+        super.showContent()
+
+        lblName.text = viewModel.currentDetailObject?.name
+        lblInstructions.text = viewModel.currentDetailObject?.instructions
+        lblInstructions.numberOfLines = 3
+        tblIngredients.reloadData()
+        
+        self.checkLabelHeight()
+        reloadScrollViewContent()
+    }
+
+    override func onClickCloseError() {
+        super.onClickCloseError()
+        self.navigationController?.popViewController(animated: true)
     }
 
     func fetchDataFromServer(){
@@ -93,39 +124,24 @@ class DetailViewController: BaseViewController {
 
             self.showContent()
 
-            guard let mealDetail = mealDetail, error == nil else {
-                self.showError(error: error?.localizedDescription ?? "Some unknown Error Occured")
+            guard error == nil else {
+                self.showError(error: error?.errorMessage ?? "Some unknown Error Occured")
                 return
             }
 
-            self.mealDetail = mealDetail
-            self.reloadViews()
-            //FIXME: theMealDB is down. Testing pending -> added local testing Data
+            self.showContent()
         }
-    }
-
-    func reloadViews(){
-        lblName.text = self.mealDetail?.name
-        lblInstructions.text = self.mealDetail?.instructions
-        lblInstructions.numberOfLines = 3
-        tblIngredients.reloadData()
-        
-        self.checkLabelHeight()
-        reloadScrollViewContent()
     }
 }
 
 extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        self.mealDetail?.ingredients.count ?? 0
+        viewModel.currentDetailObject?.ingredients.count ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = self.mealDetail?.ingredients[indexPath.row].displayName
+        cell.textLabel?.text = viewModel.currentDetailObject?.ingredients[indexPath.row].displayName
         return cell
     }
-
-
-
 }

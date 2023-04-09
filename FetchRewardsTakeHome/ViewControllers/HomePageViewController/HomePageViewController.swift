@@ -38,7 +38,7 @@ class HomePageViewController: BaseViewController {
 //            self.debug()
             guard error == nil, arrMeals.count != 0 else {
                 self.showError(
-                    error: error?.localizedDescription ?? "Some unknown Error Occured",
+                    error: error?.errorMessage ?? "Some unknown Error Occured",
                     withRetryButton: true
                 )
                 return

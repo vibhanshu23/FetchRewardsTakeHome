@@ -101,7 +101,7 @@ class BaseViewController: UIViewController {
             lblError.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 80),
             lblError.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -80),
             lblError.topAnchor.constraint(equalTo: errorImageView.bottomAnchor, constant: 20),
-            btnClose.topAnchor.constraint(equalTo: view.topAnchor, constant: 80),
+            btnClose.topAnchor.constraint(equalTo: view.topAnchor, constant: 60),
             btnClose.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             btnRetry.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             btnRetry.topAnchor.constraint(equalTo: lblError.bottomAnchor, constant: 180)
