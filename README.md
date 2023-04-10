@@ -12,6 +12,7 @@ click on the "instruction" to view an exploded view of the text.
 Notes to reviewer:
 
 Data Flow:
+   
     App launch - HomePageViewController
     
     request network call - ViewModel
