@@ -13,11 +13,17 @@ Notes to reviewer:
 
 Data Flow:
     App launch - HomePageViewController
+    
     request network call - ViewModel
+    
     make network call - NetworkHandler
+    
     convert the response(MealObjectFromServer, MealDetailsObjectFromServer) to interface object (Meal,MealDetail) - Calling Logic is in ViewModel but the                   function is defined in (MealObjectFromServer, MealDetailsObjectFromServer)
+    
     data sorting - ViewModel
+    
     Display Data - HomePageViewController
+    
 
 -- Please pull the code from the branch "Dev".
 
