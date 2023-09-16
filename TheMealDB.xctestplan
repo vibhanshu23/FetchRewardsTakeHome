@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "2305D2BB-08C9-4CA8-ACBC-32DBBE1F900E",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:TheMealDB.xcodeproj",
+        "identifier" : "D4FE363929DB7C7B00DCEE4A",
+        "name" : "TheMealDBTests"
+      }
+    }
+  ],
+  "version" : 1
+}

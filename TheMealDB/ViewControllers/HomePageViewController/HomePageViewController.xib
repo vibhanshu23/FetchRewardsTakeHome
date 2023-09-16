@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_0" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomePageViewController" customModule="FetchRewardsTakeHome" customModuleProvider="target">
+            <connections>
+                <outlet property="cvMealList" destination="jKa-dt-qcx" id="oYy-KC-wwK"/>
+                <outlet property="lblDessert" destination="e3Z-zh-6cV" id="6wH-tR-ScR"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" id="Cte-QU-DfZ">
+                    <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <subviews>
+                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="jKa-dt-qcx">
+                            <rect key="frame" x="16" y="154" width="358" height="656"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="dMJ-F6-soT">
+                                <size key="itemSize" width="128" height="128"/>
+                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            </collectionViewFlowLayout>
+                            <cells/>
+                        </collectionView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Desserts" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e3Z-zh-6cV">
+                            <rect key="frame" x="32" y="79" width="326" height="43"/>
+                            <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="36"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lac-ZL-eoB">
+                            <rect key="frame" x="324" y="83" width="50" height="50"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="HF6-2P-JVD"/>
+                                <constraint firstAttribute="width" constant="50" id="P1t-dj-2CR"/>
+                            </constraints>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" image="network" catalog="system"/>
+                            <connections>
+                                <action selector="onClickShowLoadingScreen:" destination="-1" eventType="touchUpInside" id="6r7-58-M35"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ysp-h9-j6D">
+                            <rect key="frame" x="275" y="83" width="51" height="50"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="BfL-B4-l8u"/>
+                                <constraint firstAttribute="width" constant="51" id="zUu-XB-rFh"/>
+                            </constraints>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" image="exclamationmark.triangle" catalog="system"/>
+                            <connections>
+                                <action selector="onClickShowErrorScreen:" destination="-1" eventType="touchUpInside" id="abf-VU-LsU"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <viewLayoutGuide key="safeArea" id="Vn1-aS-JnS"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="e3Z-zh-6cV" firstAttribute="leading" secondItem="Vn1-aS-JnS" secondAttribute="leading" constant="32" id="2Z0-0O-Xie"/>
+                        <constraint firstItem="Vn1-aS-JnS" firstAttribute="trailing" secondItem="e3Z-zh-6cV" secondAttribute="trailing" constant="32" id="2g3-PA-gNQ"/>
+                        <constraint firstItem="Ysp-h9-j6D" firstAttribute="centerY" secondItem="Lac-ZL-eoB" secondAttribute="centerY" id="3vf-sU-ne0"/>
+                        <constraint firstItem="jKa-dt-qcx" firstAttribute="top" secondItem="e3Z-zh-6cV" secondAttribute="bottom" constant="32" id="AuU-zm-lzl"/>
+                        <constraint firstItem="Lac-ZL-eoB" firstAttribute="leading" secondItem="Ysp-h9-j6D" secondAttribute="trailing" constant="-2" id="TTn-RD-Xhr"/>
+                        <constraint firstItem="e3Z-zh-6cV" firstAttribute="top" secondItem="Vn1-aS-JnS" secondAttribute="top" constant="32" id="bCJ-gh-cx1"/>
+                        <constraint firstItem="Lac-ZL-eoB" firstAttribute="top" secondItem="e3Z-zh-6cV" secondAttribute="top" constant="4" id="dOH-o7-ZE6"/>
+                        <constraint firstItem="Vn1-aS-JnS" firstAttribute="trailing" secondItem="Lac-ZL-eoB" secondAttribute="trailing" constant="16" id="h4q-dk-phO"/>
+                        <constraint firstItem="Vn1-aS-JnS" firstAttribute="trailing" secondItem="jKa-dt-qcx" secondAttribute="trailing" constant="16" id="oWP-R1-wLh"/>
+                        <constraint firstItem="Vn1-aS-JnS" firstAttribute="bottom" secondItem="jKa-dt-qcx" secondAttribute="bottom" id="xMB-RB-Ayq"/>
+                        <constraint firstItem="jKa-dt-qcx" firstAttribute="leading" secondItem="Vn1-aS-JnS" secondAttribute="leading" constant="16" id="yQ2-m9-Eb1"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <point key="canvasLocation" x="21.538461538461537" y="-11.374407582938389"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="exclamationmark.triangle" catalog="system" width="128" height="109"/>
+        <image name="network" catalog="system" width="128" height="123"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

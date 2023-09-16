@@ -1,0 +1,51 @@
+{
+  "configurations" : [
+    {
+      "id" : "3B4FD1EC-FBB3-4A0E-8AC6-D32BF5AEE1AB",
+      "name" : "Configuration 1",
+      "options" : {
+        "commandLineArgumentEntries" : [
+          {
+            "argument" : "--test-plan-discovery-timeout = 10"
+          }
+        ]
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : {
+      "targets" : [
+        {
+          "containerPath" : "container:FetchRewardsTakeHome.xcodeproj",
+          "identifier" : "D4FE362329DB7C7900DCEE4A",
+          "name" : "FetchRewardsTakeHome"
+        }
+      ]
+    },
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:FetchRewardsTakeHome.xcodeproj",
+      "identifier" : "D4FE362329DB7C7900DCEE4A",
+      "name" : "FetchRewardsTakeHome"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:FetchRewardsTakeHome.xcodeproj",
+        "identifier" : "D4FE363929DB7C7B00DCEE4A",
+        "name" : "FetchRewardsTakeHomeTests"
+      }
+    },
+    {
+      "enabled" : false,
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:FetchRewardsTakeHome.xcodeproj",
+        "identifier" : "D4FE364329DB7C7B00DCEE4A",
+        "name" : "FetchRewardsTakeHomeUITests"
+      }
+    }
+  ],
+  "version" : 1
+}
